@@ -1,0 +1,25 @@
+uuid: ecb75a6c-a30d-4e77-8925-0261c2f3554c
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: bbIWJ5vKoXgFBbbiwqPAXgEnrZ2X3QSsV2VkrAVfnYM
+id: gidas_b5_branding
+theme: gidas_b5
+region: nav_branding
+weight: -6
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

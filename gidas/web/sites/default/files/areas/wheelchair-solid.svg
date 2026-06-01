@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="31.75mm"
+   height="31.75mm"
+   viewBox="0 0 31.75 31.75"
+   version="1.1"
+   id="svg20"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="wheelchair-solid.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.69753788"
+     inkscape:cx="385.64214"
+     inkscape:cy="416.46484"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs17" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-3.1977051,-38.473568)">
+    <path
+       fill="currentColor"
+       d="m 33.961783,62.389564 0.88224,1.777441 c 0.243644,0.490824 0.04322,1.086197 -0.4476,1.329842 l -4.059598,2.039318 c -0.995227,0.494046 -2.204888,0.07404 -2.678224,-0.933586 L 23.76569,58.317314 h -8.661735 c -0.987536,0 -1.824756,-0.726157 -1.964469,-1.70377 -2.101453,-14.710235 -1.980716,-13.79643 -2.004281,-14.171229 0,-2.254622 1.880072,-4.07014 4.15801,-3.964347 2.063192,0.09581 3.72368,1.792448 3.778064,3.85719 0.05383,2.042232 -1.435695,3.746935 -3.386336,4.033181 l 0.289595,2.027163 h 8.059105 c 0.547998,0 0.992187,0.44419 0.992187,0.992187 v 1.984375 c 0,0.547998 -0.444189,0.992188 -0.992187,0.992188 h -7.492132 l 0.283518,1.984374 h 8.200801 a 1.9843751,1.9843751 0 0 1 1.795986,1.14052 l 3.566604,7.590671 2.243459,-1.137853 c 0.490823,-0.243645 1.08626,-0.04322 1.329904,0.4476 z M 22.50555,60.30169 h -1.519659 c -0.482947,3.361285 -3.381375,5.953125 -6.874123,5.953125 -3.829658,0 -6.9453129,-3.115654 -6.9453129,-6.945311 0,-2.573797 1.4072939,-4.825072 3.4927479,-6.024812 -0.230187,-1.610134 -0.424408,-2.967881 -0.588367,-4.113424 -4.0233202,1.609391 -6.8731309,5.547073 -6.8731309,10.138236 0,6.018051 4.8960113,10.914063 10.9140629,10.914063 4.456782,0 8.29754,-2.685605 9.990708,-6.523137 z"
+       id="path104"
+       style="fill:#ff0000;fill-opacity:1;stroke-width:0.0620116" />
+  </g>
+</svg>

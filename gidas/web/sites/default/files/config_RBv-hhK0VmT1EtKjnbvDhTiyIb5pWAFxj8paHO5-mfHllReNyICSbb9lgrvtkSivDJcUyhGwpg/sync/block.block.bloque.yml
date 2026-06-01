@@ -1,0 +1,34 @@
+uuid: 7154362f-914e-4336-a5cb-92a6b3c17337
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3ecb82b4-55a2-42dc-8fe2-2c9dfa5474d7'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: 'bg-degrade-info position-relative pt-18 pb-6 text-white'
+id: bloque
+theme: gidas_b5
+region: bottom
+weight: -6
+provider: null
+plugin: 'block_content:3ecb82b4-55a2-42dc-8fe2-2c9dfa5474d7'
+settings:
+  id: 'block_content:3ecb82b4-55a2-42dc-8fe2-2c9dfa5474d7'
+  label: bloque
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Theme override for a field based on the @stable field template. See that
+ * file for full documentation.
+ *
+ * field_label supplies one additional variable:
+ * - label_tag: The label wrapper tag as chosen in the field_label.
+ *
+ * This template won't used if your theme overrides field.html.twig. Modify
+ * your own template to use the label_tag, e.g.:
+ *
+ *   <{{ label_tag|default('div') }}>
+ *     {{ label }}
+ *   </{{ label_tag|default('div') }}>
+ *
+ * @see field_label_preprocess_field()
+ */
+#}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label py-025 px-075 bg-danger text-uppercase text-white strong mb-1 fw-bold d-inline-block',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+
+{% if label_hidden %}
+  {% if multiple %}
+
+      <div{{ attributes.addClass(classes, 'field__items row') }}>
+        {% for item in items %}
+          <div{{ item.attributes.addClass('field__item col-6 col-md-2 my-1') }}>{{ item.content }}</div>
+        {% endfor %}
+      </div>
+
+  {% else %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% endif %}
+{% else %}
+
+  <div{{ attributes.addClass(classes) }}>
+    <{{ label_tag|default('div') }}{{ title_attributes.addClass(title_classes) }}>{{ label }}</{{ label_tag|default('div') }}>
+    {% if multiple %}
+      <div class="field__items row">
+    {% endif %}
+    {% for item in items %}
+      <div{{ item.attributes.addClass('field__item col-6 col-md-2 my-1') }}>{{ item.content }}</div>
+    {% endfor %}
+    {% if multiple %}
+      </div>
+    {% endif %}
+  </div>
+
+{% endif %}

@@ -1,0 +1,207 @@
+uuid: b9a0878c-dce3-4c7f-a215-db600a4d7811
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_fecha_ingreso_gidas
+    - field.field.user.user.field_integrante_activo_gidas
+    - field.field.user.user.field_integrante_apellido
+    - field.field.user.user.field_integrante_nombres
+    - field.field.user.user.field_integrantes_titulo
+    - field.field.user.user.field_prefijo_grado_academico
+    - field.field.user.user.field_rol
+    - field.field.user.user.field_temas_de_interes
+    - field.field.user.user.user_picture
+    - image.style.cuadradas
+  module:
+    - field_formatter_class
+    - field_group
+    - field_label
+    - svg_image
+    - user
+third_party_settings:
+  field_group:
+    group_row:
+      children:
+        - group_col_left
+        - group_col_right
+      label: 'row '
+      parent_name: ''
+      region: content
+      weight: 0
+      format_type: html_element
+      format_settings:
+        classes: 'row justify-content-center'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_col_left:
+      children:
+        - user_picture
+        - group_div
+      label: 'col-left '
+      parent_name: group_row
+      region: content
+      weight: 20
+      format_type: html_element
+      format_settings:
+        classes: 'col-md-3 pt-2 text-center flex-column col-md-offset-2'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_col_right:
+      children:
+        - field_integrantes_titulo
+        - field_rol
+        - field_temas_de_interes
+        - group_div_proy
+      label: col-right
+      parent_name: group_row
+      region: content
+      weight: 21
+      format_type: html_element
+      format_settings:
+        classes: col-md-7
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+    group_div:
+      children:
+        - datos_integrante_entity_view_1
+      label: ''
+      parent_name: group_col_left
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: 'd-inline-flex strong text-danger mt-1 lead border-bottom pb-025 mb-025  flex-wrap  justify-content-center'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+        description: ''
+        open: 0
+    group_div_proy:
+      children:
+        - datos_integrante_entity_view_3
+      label: 'Proyectos relacionados'
+      parent_name: group_col_right
+      region: content
+      weight: 5
+      format_type: details
+      format_settings:
+        classes: 'small text-muted border-start border-secondary mb-1'
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+_core:
+  default_config_hash: E1qmUI2SlozLlJ308jfMMFKT67l1p6PywE2LTRbeYS4
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  datos_integrante_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  datos_integrante_entity_view_3:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_integrantes_titulo:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'mt-2 mb-2 me-05 ms-1 py-2'
+      field_label:
+        label_class: 'ps-1 border-start border-danger border-3 fs-5 mb-1 ms-n1'
+        label_value: 'Formación Académica'
+        label_tag: ''
+    weight: 2
+    region: content
+  field_rol:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      field_formatter_class:
+        class: 'mb-2 ms-1'
+      field_label:
+        label_class: 'text-muted ps-1 border-start border-danger border-3 fs-5 mb-1 ms-n1'
+        label_value: 'Rol en el grupo GIDAS'
+        label_tag: div
+    weight: 3
+    region: content
+  field_temas_de_interes:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      field_formatter_class:
+        class: 'mb-5 ms-1'
+      field_label:
+        label_class: 'text-muted ps-1 border-start border-danger border-3 fs-5 mb-1 ms-n1'
+        label_value: 'Temas de Interés'
+        label_tag: ''
+    weight: 4
+    region: content
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: cuadradas
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings:
+      field_formatter_class:
+        class: px-3
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 1
+    region: content
+hidden:
+  field_fecha_ingreso_gidas: true
+  field_integrante_activo_gidas: true
+  field_integrante_apellido: true
+  field_integrante_nombres: true
+  field_prefijo_grado_academico: true
+  langcode: true
+  member_for: true
+  realname: true

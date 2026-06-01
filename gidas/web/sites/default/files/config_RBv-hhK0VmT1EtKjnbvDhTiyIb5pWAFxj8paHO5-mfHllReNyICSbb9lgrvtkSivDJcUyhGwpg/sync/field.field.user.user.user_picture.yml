@@ -1,0 +1,59 @@
+uuid: 16fc6bad-4825-48a6-ab46-f24bcefef976
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.user_picture
+  module:
+    - filefield_paths
+    - image
+    - user
+third_party_settings:
+  filefield_paths:
+    enabled: false
+    file_path:
+      value: usuarios
+      options:
+        slashes: true
+        pathauto: true
+        transliterate: true
+    file_name:
+      value: '[user:field_nombre_y_apellido].[file:ffp-extension-original]'
+      options:
+        slashes: true
+        pathauto: true
+        transliterate: true
+    redirect: false
+    retroactive_update: false
+    active_updating: false
+_core:
+  default_config_hash: twhm-ZOwSVkUjuLI_pQsaPo_pVLcqFfDmY-ojfqw0yk
+id: user.user.user_picture
+field_name: user_picture
+entity_type: user
+bundle: user
+label: Imagen
+description: 'Su cara o foto virtual.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: pictures
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: false
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: 9a564477-3aca-4123-9e8a-90f75e014784
+    alt: integrante
+    title: ''
+    width: 533
+    height: 515
+field_type: image

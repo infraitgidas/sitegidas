@@ -1,0 +1,50 @@
+<div id="{{ id }}" class="carousel {{ effect }}"
+    data-bs-interval="{{ interval }}"
+    {% if ride %} data-bs-ride="carousel" {% endif %}
+    data-bs-pause="{% if pause %}hover{% else %}false{% endif %}"
+>
+  {# Show indicators if set in view. #}
+  {%  if indicators %}
+  <ol class="carousel-indicators">
+      {% for key, row in rows %}
+          {% set indicator_classes = [loop.first ? 'active'] %}
+          <button type="button" class="{{ indicator_classes|join(' ') }}" data-bs-target="#{{ id }}" data-bs-slide-to="{{ key }}"></button>
+      {% endfor %}
+  </ol>
+  {% endif %}
+
+  {# Carousel body. #}
+  <div class="carousel-inner">
+    {% for row in rows %}
+        {% set row_classes = ['carousel-item', loop.first ? 'active'] %}
+        <div class="{{ row_classes|join(' ') }}">
+        {{ row.image }}
+        {% if row.title or row.description %}
+            {%  if use_caption %}
+            <div class="carousel-caption d-none d-md-block">
+            {% endif %}
+            {% if row.title %}
+                <h3>{{ row.title }}</h3>
+            {% endif %}
+            {% if row.description %}
+                <p>{{ row.description }}</p>
+            {% endif %}
+            {%  if use_caption %}
+            </div>
+            {% endif %}
+        {% endif %}
+        </div>
+    {% endfor %}
+  </div>
+  {# Controls #}
+  {% if navigation %}
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ id }}" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">{{ 'Previous'|t }}</button>
+    </a>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ id }}" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">{{ 'Next'|t }}</button>
+    </a>
+  {% endif %}
+</div>

@@ -1,0 +1,14 @@
+uuid: 5dac9710-0448-407e-b735-72bf898f252f
+langcode: es
+status: true
+dependencies:
+  module:
+    - user
+id: integrantes
+label: Integrantes
+type: 'canonical_entities:user'
+pattern: 'integrantes/[user:field_nombre_y_apellido]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

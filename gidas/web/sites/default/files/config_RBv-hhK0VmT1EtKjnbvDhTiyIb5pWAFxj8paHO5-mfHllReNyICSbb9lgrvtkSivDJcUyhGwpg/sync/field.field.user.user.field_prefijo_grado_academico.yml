@@ -1,0 +1,30 @@
+uuid: 681b7076-334b-4b7c-8345-aa11ee4b8445
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_prefijo_grado_academico
+    - taxonomy.vocabulary.prefijo_titulo_academico
+  module:
+    - user
+id: user.user.field_prefijo_grado_academico
+field_name: field_prefijo_grado_academico
+entity_type: user
+bundle: user
+label: 'Prefijo Grado Académico'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      prefijo_titulo_academico: prefijo_titulo_academico
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

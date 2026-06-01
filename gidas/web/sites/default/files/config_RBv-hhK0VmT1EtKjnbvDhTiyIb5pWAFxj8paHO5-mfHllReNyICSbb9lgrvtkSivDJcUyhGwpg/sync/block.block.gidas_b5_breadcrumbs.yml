@@ -1,0 +1,30 @@
+uuid: 154a314c-01fb-4d7c-83f3-be879583e38e
+langcode: es
+status: true
+dependencies:
+  module:
+    - block_class
+    - system
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: 'text-dark text-uppercase small my-1 border-bottom py-05 px-1'
+_core:
+  default_config_hash: EyOLTS9ilN8itHWL6AK7FihHO-gM-Wqp-pH6Rl8EgQg
+id: gidas_b5_breadcrumbs
+theme: gidas_b5
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: '<front>'

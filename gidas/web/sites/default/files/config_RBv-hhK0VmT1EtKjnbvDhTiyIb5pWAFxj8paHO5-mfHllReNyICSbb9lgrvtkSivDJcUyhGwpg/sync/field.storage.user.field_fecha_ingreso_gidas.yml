@@ -1,0 +1,20 @@
+uuid: c7b900d4-0fbf-45f9-9f87-df1206b090e0
+langcode: es
+status: true
+dependencies:
+  module:
+    - datetime
+    - user
+id: user.field_fecha_ingreso_gidas
+field_name: field_fecha_ingreso_gidas
+entity_type: user
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

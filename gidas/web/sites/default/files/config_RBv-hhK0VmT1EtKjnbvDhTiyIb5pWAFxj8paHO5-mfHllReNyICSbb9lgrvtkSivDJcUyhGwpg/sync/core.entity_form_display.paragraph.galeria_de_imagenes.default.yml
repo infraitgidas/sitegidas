@@ -1,0 +1,28 @@
+uuid: 00b71527-1dad-4e24-8181-7e2c5e7b70e9
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.galeria_de_imagenes.field_imagenes_galeria
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.galeria_de_imagenes
+  module:
+    - focal_point
+id: paragraph.galeria_de_imagenes.default
+targetEntityType: paragraph
+bundle: galeria_de_imagenes
+mode: default
+content:
+  field_imagenes_galeria:
+    type: image_focal_point
+    weight: 0
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+      preview_link: true
+      offsets: '50,50'
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

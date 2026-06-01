@@ -1,0 +1,20 @@
+uuid: 95fc0ecd-116a-468e-a2f0-2970e3817f68
+langcode: es
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - user
+id: user.field_rol
+field_name: field_rol
+entity_type: user
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

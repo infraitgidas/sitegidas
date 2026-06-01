@@ -1,0 +1,30 @@
+uuid: e01aaeba-8b57-4ae0-8c6a-9b9a6ad8d83f
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_integrantes_titulo
+    - taxonomy.vocabulary.titulo
+  module:
+    - user
+id: user.user.field_integrantes_titulo
+field_name: field_integrantes_titulo
+entity_type: user
+bundle: user
+label: 'Formación Académica'
+description: 'Títulos académicos -  <a href="/admin/structure/taxonomy/manage/titulo/overview" target="_blank">VER LISTADO EXISTENTE</a> antes de agregar un nuevo ítem con el objetivo de no duplicar.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      titulo: titulo
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

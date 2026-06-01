@@ -1,0 +1,4 @@
+_core:
+  default_config_hash: g5omwWKI2ZAuCm_ECiSW2OfMsp3P5XtDy2vxPQcck0w
+langcode: es
+pattern: '[user:field_integrante_nombres] [user:field_integrante_apellido:value]'

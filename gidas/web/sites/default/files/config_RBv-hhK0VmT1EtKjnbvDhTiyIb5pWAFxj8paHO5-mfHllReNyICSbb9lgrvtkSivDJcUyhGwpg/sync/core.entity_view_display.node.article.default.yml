@@ -1,0 +1,97 @@
+uuid: 210daf5b-4a29-491c-b3b8-05303e0be350
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.node.article.body
+    - field.field.node.article.field_extras
+    - field.field.node.article.field_fecha_noticia
+    - field.field.node.article.field_image
+    - field.field.node.article.field_tags
+    - image.style.large
+    - node.type.article
+  module:
+    - datetime
+    - entity_reference_revisions
+    - field_formatter_class
+    - field_label
+    - svg_image
+    - text
+    - user
+_core:
+  default_config_hash: b4RQ-Nfz-gOoG_jjftd_qDIz4lf_-OzlxoLHkRXjfrE
+id: node.article.default
+targetEntityType: node
+bundle: article
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: mt-2
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 2
+    region: content
+  field_extras:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings:
+      field_formatter_class:
+        class: 'bg-secondary bg-opacity-50 p-1 my-3 rounded'
+      field_label:
+        label_class: 'strong fs-5 bg-danger p-1 text-uppercase text-white'
+        label_value: 'Galería de Imágenes'
+        label_tag: ''
+    weight: 4
+    region: content
+  field_fecha_noticia:
+    type: datetime_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings:
+      field_formatter_class:
+        class: 'opacity-75 py-3 small'
+      field_label:
+        label_class: ''
+        label_value: 'Última modificación'
+        label_tag: ''
+    weight: 0
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings:
+      field_formatter_class:
+        class: 'float-start mb-5 me-3'
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_tags: true
+  langcode: true

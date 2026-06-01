@@ -1,0 +1,22 @@
+uuid: 83359388-7952-473e-8088-98fb44f401cf
+langcode: es
+status: true
+dependencies:
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: pkxQlHlkrxonz5JB0THXp4-R1Hhyqo10kIrJRSk5Kls
+id: gidas_b5_local_tasks
+theme: gidas_b5
+region: content
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }

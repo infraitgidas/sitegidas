@@ -1,0 +1,8 @@
+uuid: b1a10127-c6ac-4c49-b222-123a97bfe63a
+langcode: es
+status: true
+dependencies: {  }
+name: Disciplinas
+vid: tematicas
+description: ''
+weight: 0

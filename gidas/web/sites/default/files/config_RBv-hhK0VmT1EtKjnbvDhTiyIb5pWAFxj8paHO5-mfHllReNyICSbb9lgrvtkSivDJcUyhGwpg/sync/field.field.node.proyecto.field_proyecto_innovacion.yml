@@ -1,0 +1,23 @@
+uuid: 5b1107dc-7b63-4a89-b224-9b34b905838e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_proyecto_innovacion
+    - node.type.proyecto
+id: node.proyecto.field_proyecto_innovacion
+field_name: field_proyecto_innovacion
+entity_type: node
+bundle: proyecto
+label: 'Es proyecto de innovación '
+description: 'Indicar si el proyecto es de innovación'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Sí
+  off_label: 'No'
+field_type: boolean

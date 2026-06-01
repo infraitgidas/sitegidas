@@ -1,0 +1,20 @@
+uuid: bb5ba6ad-338f-402a-967a-7fdc4ffc7e37
+langcode: es
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_fecha_fin_del_proyecto
+field_name: field_fecha_fin_del_proyecto
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

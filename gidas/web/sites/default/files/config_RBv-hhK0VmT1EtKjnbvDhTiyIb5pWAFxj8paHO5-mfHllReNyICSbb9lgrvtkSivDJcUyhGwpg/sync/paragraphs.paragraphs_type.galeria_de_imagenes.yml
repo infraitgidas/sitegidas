@@ -1,0 +1,10 @@
+uuid: 91e37676-0cf1-4c39-b28c-c0c1b1c7c0d1
+langcode: es
+status: true
+dependencies: {  }
+id: galeria_de_imagenes
+label: 'Galeria de imagenes'
+icon_uuid: null
+icon_default: null
+description: 'Inserta una galería de imagenes en los articulos'
+behavior_plugins: {  }

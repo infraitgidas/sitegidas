@@ -1,0 +1,20 @@
+uuid: 1b94869d-135f-40d7-b751-6ae295aee301
+langcode: es
+status: true
+dependencies:
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: b7QHxwDpuKjav3zaLAZsWLlN4a26UZYf1eB5xnhJuGc
+id: gidas_b5_local_actions
+theme: gidas_b5
+region: content
+weight: -4
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

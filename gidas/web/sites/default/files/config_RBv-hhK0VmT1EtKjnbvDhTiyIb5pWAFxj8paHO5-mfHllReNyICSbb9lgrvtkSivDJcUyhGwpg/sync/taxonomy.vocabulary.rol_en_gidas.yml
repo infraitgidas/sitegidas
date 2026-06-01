@@ -1,0 +1,8 @@
+uuid: a7187ef3-4df0-4998-bfc9-24a9f475cc91
+langcode: es
+status: true
+dependencies: {  }
+name: 'Rol en GIDAS'
+vid: rol_en_gidas
+description: 'Listado de Roles y Funciones del GIDAS'
+weight: 0

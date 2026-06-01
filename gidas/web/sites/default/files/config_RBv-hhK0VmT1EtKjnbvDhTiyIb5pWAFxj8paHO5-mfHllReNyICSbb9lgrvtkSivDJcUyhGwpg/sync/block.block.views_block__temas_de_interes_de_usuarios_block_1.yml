@@ -1,0 +1,25 @@
+uuid: 1884e29d-20e6-47b1-b66e-063dfd17c3aa
+langcode: es
+status: true
+dependencies:
+  config:
+    - views.view.temas_de_interes_de_usuarios
+  module:
+    - views
+  theme:
+    - gidas_b5
+id: views_block__temas_de_interes_de_usuarios_block_1
+theme: gidas_b5
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:temas_de_interes_de_usuarios-block_1'
+settings:
+  id: 'views_block:temas_de_interes_de_usuarios-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility: {  }

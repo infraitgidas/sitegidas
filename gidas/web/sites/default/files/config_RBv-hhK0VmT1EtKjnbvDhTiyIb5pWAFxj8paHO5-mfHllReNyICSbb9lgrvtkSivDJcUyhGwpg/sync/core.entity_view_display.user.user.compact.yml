@@ -1,0 +1,42 @@
+uuid: 265dd3d6-26e3-4ea4-babc-a6a5cb1386a9
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.compact
+    - field.field.user.user.field_fecha_ingreso_gidas
+    - field.field.user.user.field_integrante_activo_gidas
+    - field.field.user.user.field_integrante_apellido
+    - field.field.user.user.field_integrante_nombres
+    - field.field.user.user.field_integrantes_titulo
+    - field.field.user.user.field_prefijo_grado_academico
+    - field.field.user.user.field_rol
+    - field.field.user.user.field_temas_de_interes
+    - field.field.user.user.user_picture
+  module:
+    - user
+_core:
+  default_config_hash: kD2TjItfNDKFw2CFJQfuv4Ys6qg3uYa4hCJYN2jreec
+id: user.user.compact
+targetEntityType: user
+bundle: user
+mode: compact
+content:
+  datos_integrante_entity_view_1:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_fecha_ingreso_gidas: true
+  field_integrante_activo_gidas: true
+  field_integrante_apellido: true
+  field_integrante_nombres: true
+  field_integrantes_titulo: true
+  field_prefijo_grado_academico: true
+  field_rol: true
+  field_temas_de_interes: true
+  langcode: true
+  member_for: true
+  realname: true
+  user_picture: true

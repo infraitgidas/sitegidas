@@ -1,0 +1,11 @@
+uuid: 6b42f5a8-b769-4018-8d8f-fe0d29b22589
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.prefijo_titulo_academico
+id: taxonomy_term.prefijo_titulo_academico
+target_entity_type_id: taxonomy_term
+target_bundle: prefijo_titulo_academico
+default_langcode: site_default
+language_alterable: false

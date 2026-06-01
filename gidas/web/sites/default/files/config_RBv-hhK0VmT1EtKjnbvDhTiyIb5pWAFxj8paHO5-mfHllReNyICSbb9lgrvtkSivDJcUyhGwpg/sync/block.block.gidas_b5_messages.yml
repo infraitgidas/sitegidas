@@ -1,0 +1,22 @@
+uuid: 54ca6080-b0ae-4d17-8358-18e3df5e4655
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: f1h-hHCyHXa0fD1k5n4GUxBXQltWM2Q9h3guCvHxyLw
+id: gidas_b5_messages
+theme: gidas_b5
+region: content
+weight: -8
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

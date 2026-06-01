@@ -1,0 +1,17 @@
+uuid: 92814bc7-681a-4650-adfb-96176c656401
+langcode: es
+status: true
+dependencies:
+  module:
+    - focal_point
+name: cuadradas
+label: Cuadradas
+effects:
+  8b10cdb0-01ef-45d9-8838-4400b58cac77:
+    uuid: 8b10cdb0-01ef-45d9-8838-4400b58cac77
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 500
+      crop_type: focal_point

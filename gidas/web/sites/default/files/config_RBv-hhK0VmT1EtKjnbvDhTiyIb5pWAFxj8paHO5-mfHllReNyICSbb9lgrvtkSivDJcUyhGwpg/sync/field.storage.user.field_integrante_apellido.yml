@@ -1,0 +1,20 @@
+uuid: c3dd12a0-3ded-4aef-8572-8f6b0eca8163
+langcode: es
+status: true
+dependencies:
+  module:
+    - text
+    - user
+id: user.field_integrante_apellido
+field_name: field_integrante_apellido
+entity_type: user
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

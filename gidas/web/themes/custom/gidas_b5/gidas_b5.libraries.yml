@@ -1,0 +1,11 @@
+global-styling:
+  css:
+    theme:
+      css/style.css: {}
+  js:
+      https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1: { type: external, minified: false }
+      js/scripts.js: {}
+  dependencies:
+        - core/drupal
+        - core/jquery
+        - core/jquery.once

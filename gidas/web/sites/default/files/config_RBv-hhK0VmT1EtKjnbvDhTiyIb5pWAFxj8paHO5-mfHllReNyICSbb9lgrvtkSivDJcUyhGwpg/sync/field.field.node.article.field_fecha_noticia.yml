@@ -1,0 +1,24 @@
+uuid: 9c653b23-80c7-484c-82a6-889679eddeea
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fecha_noticia
+    - node.type.article
+  module:
+    - datetime
+id: node.article.field_fecha_noticia
+field_name: field_fecha_noticia
+entity_type: node
+bundle: article
+label: 'Fecha '
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

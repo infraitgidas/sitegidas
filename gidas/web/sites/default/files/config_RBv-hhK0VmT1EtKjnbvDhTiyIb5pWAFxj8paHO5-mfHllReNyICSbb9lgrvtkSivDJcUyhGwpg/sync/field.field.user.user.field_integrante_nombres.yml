@@ -1,0 +1,21 @@
+uuid: ce725160-2bfc-48f9-aa14-e70b58d1c270
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_integrante_nombres
+  module:
+    - text
+    - user
+id: user.user.field_integrante_nombres
+field_name: field_integrante_nombres
+entity_type: user
+bundle: user
+label: Nombre
+description: 'Escribe tu nombre completo'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

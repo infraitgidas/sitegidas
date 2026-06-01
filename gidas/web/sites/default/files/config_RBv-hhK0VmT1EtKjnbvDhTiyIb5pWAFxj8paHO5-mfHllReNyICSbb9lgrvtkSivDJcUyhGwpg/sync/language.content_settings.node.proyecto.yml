@@ -1,0 +1,11 @@
+uuid: eb0fb241-4b17-4f7b-b46d-51f9d3075f05
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.proyecto
+id: node.proyecto
+target_entity_type_id: node
+target_bundle: proyecto
+default_langcode: site_default
+language_alterable: false

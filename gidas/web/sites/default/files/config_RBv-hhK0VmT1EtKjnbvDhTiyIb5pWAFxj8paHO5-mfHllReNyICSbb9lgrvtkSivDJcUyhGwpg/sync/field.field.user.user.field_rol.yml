@@ -1,0 +1,30 @@
+uuid: bd802e04-7b9c-4517-8259-c076d2c65aec
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_rol
+    - taxonomy.vocabulary.rol_en_gidas
+  module:
+    - user
+id: user.user.field_rol
+field_name: field_rol
+entity_type: user
+bundle: user
+label: Rol
+description: 'Listado de Roles y Funciones en GIDAS, permite seleccionar múltiples valores manteniendo la tecla CTRL (control) presionada.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rol_en_gidas: rol_en_gidas
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

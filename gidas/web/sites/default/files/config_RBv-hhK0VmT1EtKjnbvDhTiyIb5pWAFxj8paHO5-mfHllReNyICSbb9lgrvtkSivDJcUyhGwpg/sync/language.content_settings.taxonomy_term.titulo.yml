@@ -1,0 +1,11 @@
+uuid: d4872ed4-a655-4554-b632-9d8f4d4f1bb7
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.titulo
+id: taxonomy_term.titulo
+target_entity_type_id: taxonomy_term
+target_bundle: titulo
+default_langcode: site_default
+language_alterable: false

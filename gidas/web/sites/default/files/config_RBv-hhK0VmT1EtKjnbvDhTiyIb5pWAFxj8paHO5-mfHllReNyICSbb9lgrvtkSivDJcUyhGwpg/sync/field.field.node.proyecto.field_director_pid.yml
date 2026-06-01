@@ -1,0 +1,29 @@
+uuid: 8309d97a-56e2-4b8f-980b-1b0e801a237c
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_director_pid
+    - node.type.proyecto
+id: node.proyecto.field_director_pid
+field_name: field_director_pid
+entity_type: node
+bundle: proyecto
+label: Director/a
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    filter:
+      type: _none
+    include_anonymous: true
+field_type: entity_reference

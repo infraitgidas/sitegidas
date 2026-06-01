@@ -1,0 +1,71 @@
+// Bootstrap variables (overrides).
+
+// override default bootstrap colors for accessibility
+//$white: #fff !default;
+//$black: #000 !default;
+//$gray-700: #495057 !default;
+
+$blue: #003CC5 !default;
+$danger: red !default;
+$light: white !default;
+$secondary: #dedede !default;
+$dark: #192C34 !default;
+
+//$cyan: #006170 !default;
+//$pink: #e21181 !default;
+//$green: #008a00 !default;
+
+//$breadcrumb-divider-color: $gray-700 !default;
+//$breadcrumb-active-color: $gray-700 !default;
+
+//$navbar-light-color: rgba($black, .6) !default;
+//$navbar-dark-color: rgba($white, .6) !default;
+
+$form-text-margin-top: 0 !default;
+$legend-font-size: 1rem !default;
+$table-cell-padding-x: .75rem;
+
+
+
+/* mios */
+$font-family-base: 'Nunito Sans', sans-serif;
+$headings-font-weight: 800;
+$display-font-weight: revert !default;
+$link-decoration: none !default;
+$link-color: $danger !default;
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  '010': (
+    $spacer * 0.10,
+  ),
+  '025': (
+      $spacer * 0.25,
+    ),
+  '05': (
+    $spacer * 0.5,
+  ),
+  '075': (
+      $spacer * 0.75,
+    ),
+  '1-25': (
+        $spacer * 1.25,
+      ),
+  '1-5': (
+        $spacer * 1.5,
+      ),
+);
+@for $i from 1 through 20 {
+  $spacers: map-merge(
+    $spacers,
+    (
+      $i: (
+        $i * $spacer,
+      ),
+    )
+  );
+}
+
+
+$enable-negative-margins: true !default;

@@ -1,0 +1,11 @@
+uuid: ca7b248a-1440-460a-91fe-743fa7309036
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rol_en_gidas
+id: taxonomy_term.rol_en_gidas
+target_entity_type_id: taxonomy_term
+target_bundle: rol_en_gidas
+default_langcode: site_default
+language_alterable: false

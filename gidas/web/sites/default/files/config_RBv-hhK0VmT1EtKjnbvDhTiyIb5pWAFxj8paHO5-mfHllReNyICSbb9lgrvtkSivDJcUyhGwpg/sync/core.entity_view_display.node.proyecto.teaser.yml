@@ -1,0 +1,124 @@
+uuid: 8d28e585-7e27-42b6-80a1-240a13896e3e
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.proyecto.body
+    - field.field.node.proyecto.field_codigo_de_homologacion
+    - field.field.node.proyecto.field_codirector_pid
+    - field.field.node.proyecto.field_director_pid
+    - field.field.node.proyecto.field_fecha_fin_del_proyecto
+    - field.field.node.proyecto.field_fecha_inicio_proyecto
+    - field.field.node.proyecto.field_proyecto_etiquetas
+    - field.field.node.proyecto.field_proyecto_innovacion
+    - field.field.node.proyecto.field_proyecto_integrantes
+    - field.field.node.proyecto.field_proyecto_nombre_corto
+    - node.type.proyecto
+  module:
+    - datetime
+    - field_formatter_class
+    - field_group
+    - field_label
+    - text
+    - user
+third_party_settings:
+  field_group:
+    group_div_row:
+      children:
+        - field_fecha_inicio_proyecto
+        - field_fecha_fin_del_proyecto
+      label: row
+      parent_name: ''
+      region: content
+      weight: 2
+      format_type: html_element
+      format_settings:
+        classes: 'd-flex flex-row'
+        show_empty_fields: false
+        id: ''
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        attributes: ''
+        effect: none
+        speed: fast
+id: node.proyecto.teaser
+targetEntityType: node
+bundle: proyecto
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings:
+      field_formatter_class:
+        class: mb-3
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 5
+    region: content
+  field_codigo_de_homologacion:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_fecha_fin_del_proyecto:
+    type: datetime_custom
+    label: inline
+    settings:
+      timezone_override: ''
+      date_format: d/m/Y
+    third_party_settings:
+      field_formatter_class:
+        class: d-flex
+      field_label:
+        label_class: ''
+        label_value: Fin
+        label_tag: span
+    weight: 4
+    region: content
+  field_fecha_inicio_proyecto:
+    type: datetime_custom
+    label: inline
+    settings:
+      timezone_override: ''
+      date_format: d/m/Y
+    third_party_settings:
+      field_formatter_class:
+        class: 'd-flex me-2'
+      field_label:
+        label_class: ''
+        label_value: Inicio
+        label_tag: span
+    weight: 3
+    region: content
+  field_proyecto_nombre_corto:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings:
+      field_formatter_class:
+        class: 'text-danger strong mt-1'
+      field_label:
+        label_class: ''
+        label_value: ''
+        label_tag: ''
+    weight: 1
+    region: content
+hidden:
+  field_codirector_pid: true
+  field_director_pid: true
+  field_proyecto_etiquetas: true
+  field_proyecto_innovacion: true
+  field_proyecto_integrantes: true
+  langcode: true
+  links: true

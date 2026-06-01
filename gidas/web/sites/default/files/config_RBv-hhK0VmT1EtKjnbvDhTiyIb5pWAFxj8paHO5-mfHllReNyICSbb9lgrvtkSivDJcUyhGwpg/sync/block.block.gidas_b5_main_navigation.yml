@@ -1,0 +1,31 @@
+uuid: c05b0881-8301-46fb-b1bb-bd63e969416a
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - block_class
+    - system
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: fs-5
+_core:
+  default_config_hash: cYBme4eYf5PzOw06gKwQSklv_D9XEbf-zDyI-hdXQrs
+id: gidas_b5_main_navigation
+theme: gidas_b5
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: true
+visibility: {  }

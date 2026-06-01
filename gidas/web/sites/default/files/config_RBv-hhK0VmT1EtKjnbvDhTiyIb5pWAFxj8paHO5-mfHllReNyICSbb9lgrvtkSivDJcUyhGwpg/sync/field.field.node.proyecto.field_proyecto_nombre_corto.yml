@@ -1,0 +1,21 @@
+uuid: 7a94789f-8bd2-41ff-8972-6976ebe315c3
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_proyecto_nombre_corto
+    - node.type.proyecto
+  module:
+    - text
+id: node.proyecto.field_proyecto_nombre_corto
+field_name: field_proyecto_nombre_corto
+entity_type: node
+bundle: proyecto
+label: 'Nombre corto'
+description: 'Sigla que se utiliza para nombrar el proyecto.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

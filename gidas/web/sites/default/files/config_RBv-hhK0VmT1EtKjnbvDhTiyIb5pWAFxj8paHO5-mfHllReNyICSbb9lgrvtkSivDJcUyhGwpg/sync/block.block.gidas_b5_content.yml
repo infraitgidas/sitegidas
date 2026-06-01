@@ -1,0 +1,22 @@
+uuid: e1e2f849-8401-4ed1-bd7e-28c4f9634d3b
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: t5yOgAl1L9fUBT0xn4thrB2Pjqc6W_Yxbx_DuTIHW0M
+id: gidas_b5_content
+theme: gidas_b5
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

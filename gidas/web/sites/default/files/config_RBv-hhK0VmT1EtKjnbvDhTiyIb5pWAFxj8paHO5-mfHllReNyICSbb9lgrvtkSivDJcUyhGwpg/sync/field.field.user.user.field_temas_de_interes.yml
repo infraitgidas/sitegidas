@@ -1,0 +1,30 @@
+uuid: 057afc3a-9077-413b-8583-f4c813d779fa
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_temas_de_interes
+    - taxonomy.vocabulary.temas_de_interes
+  module:
+    - user
+id: user.user.field_temas_de_interes
+field_name: field_temas_de_interes
+entity_type: user
+bundle: user
+label: 'Temas de Interés'
+description: 'Listado de temas de interés '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      temas_de_interes: temas_de_interes
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

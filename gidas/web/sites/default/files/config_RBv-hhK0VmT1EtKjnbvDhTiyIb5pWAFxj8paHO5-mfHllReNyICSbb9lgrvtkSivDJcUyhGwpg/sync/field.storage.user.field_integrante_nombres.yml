@@ -1,0 +1,20 @@
+uuid: 439146fd-231b-4d20-9a83-5a2b99f83f73
+langcode: es
+status: true
+dependencies:
+  module:
+    - text
+    - user
+id: user.field_integrante_nombres
+field_name: field_integrante_nombres
+entity_type: user
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

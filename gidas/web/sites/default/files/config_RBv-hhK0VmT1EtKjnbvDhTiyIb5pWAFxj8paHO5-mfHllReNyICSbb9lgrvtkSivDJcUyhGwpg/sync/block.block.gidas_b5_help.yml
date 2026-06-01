@@ -1,0 +1,22 @@
+uuid: 4e51426e-c8c1-4ebc-8691-a84cdec854e9
+langcode: es
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - gidas_b5
+_core:
+  default_config_hash: GRnVd-tWQR-wC0A967kR0L4xCBEiv-_oCHoF_nFbraY
+id: gidas_b5_help
+theme: gidas_b5
+region: content
+weight: -5
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

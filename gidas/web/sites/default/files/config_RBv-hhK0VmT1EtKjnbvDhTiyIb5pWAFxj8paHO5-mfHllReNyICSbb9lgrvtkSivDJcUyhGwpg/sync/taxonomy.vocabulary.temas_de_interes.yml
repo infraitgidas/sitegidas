@@ -1,0 +1,8 @@
+uuid: 942f363a-3801-4e4d-8fec-216bb288507e
+langcode: es
+status: true
+dependencies: {  }
+name: 'Temas de Interés'
+vid: temas_de_interes
+description: 'Temáticas de conocimientos específicos'
+weight: 0

@@ -1,0 +1,21 @@
+uuid: 4c9376d1-f918-4b33-9549-6036f53c3936
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_integrante_apellido
+  module:
+    - text
+    - user
+id: user.user.field_integrante_apellido
+field_name: field_integrante_apellido
+entity_type: user
+bundle: user
+label: Apellido
+description: 'Escribe tu apellido'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

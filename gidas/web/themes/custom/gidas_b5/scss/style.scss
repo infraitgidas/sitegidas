@@ -1,0 +1,135 @@
+// Sub theme styling.
+@import 'variables_drupal';
+
+// Bootstrap overriden variables.
+// @see https://getbootstrap.com/docs/5.1/customize/sass/#variable-defaults.
+@import 'variables_bootstrap';
+
+// Include bootstrap.
+@import '../../../../themes/contrib/bootstrap5/scss/style';
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+
+
+
+/* admin toolbar */
+#toolbar-administration {
+    z-index: 2000;
+}
+
+/* ondas block arriba */
+
+svg .elementor-shape-fill {
+	fill: white;
+}
+
+.elementor-shape-top svg .elementor-shape-fill {
+	fill: $secondary;
+}
+
+.elementor-shape-bottom svg {
+    transform: rotate(180deg);
+    width: 296vw;
+    height: 100px;
+    left: -70%;
+    position: relative;
+    @include media-breakpoint-up(lg) {
+        height: 180px;
+    }
+}
+.elementor-shape-top svg {
+    width: 150vw;
+    height: 180px;
+    left: 0%;
+    position: relative;
+    transform: scaleX(-100%);
+    top: -10px;
+    @include media-breakpoint-up(lg) {
+        height: 310px;
+    }
+}
+
+.elementor-shape-bottom {
+	overflow: hidden;
+	max-width: 100%;
+	bottom: -2px;
+}
+.elementor-shape-top {
+	overflow: hidden;
+	max-width: 100%;
+	top: 0;
+}
+
+/* colores */
+$degrade-rojo: linear-gradient(to right, $danger 0%, #670000 100%);
+$degrade-info: linear-gradient(to right, $info 0%, #006E9C 100%);
+
+.bg-degrade-rojo {
+	background-color: $danger;
+	background-image: url(/sites/default/files/sitio/fondo-binario.jpg), $degrade-rojo;
+	background-blend-mode: multiply;
+	background-size: cover;
+	background-position: center;
+}
+.bg-degrade-info {
+	background-color: $info;
+	background-image: $degrade-info;
+	background-blend-mode: multiply;
+	background-size: cover;
+	background-position: center;
+}
+
+
+/* header y navbar */
+
+header {
+	z-index: 1;
+}
+
+.breadcrumb {
+	margin-bottom: 0;
+}
+
+/* areas home */
+
+.icono-area svg {
+	fill: $danger;
+	width: 120px;
+}
+
+/* varios */
+
+.page-title::after, .block-title::after {
+	content: "";
+	width: 200px;
+	height: 5px;
+	background-color: $danger;
+	display: block;
+	margin: 20px auto;
+}
+
+strong, .strong {
+	font-weight: 800;
+}
+
+.z1 {
+	z-index: 1;
+}
+.z10 {
+	z-index: 10;
+}
+.invert {
+	filter: invert(1);
+}
+.invert-rojo {
+    filter: invert(1) hue-rotate(-182deg) saturate(2.5);
+}
+
+/* Formulario de registro */
+
+#edit-account .description {
+	display: none;
+}
+.filter-wrapper {
+	display: none;
+}

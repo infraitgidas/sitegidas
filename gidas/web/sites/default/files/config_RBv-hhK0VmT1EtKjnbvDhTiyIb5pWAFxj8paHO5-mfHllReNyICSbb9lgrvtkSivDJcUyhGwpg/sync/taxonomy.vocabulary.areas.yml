@@ -1,0 +1,8 @@
+uuid: a2f8f0f4-3afa-46a6-9a89-5b65d5d7ea15
+langcode: es
+status: true
+dependencies: {  }
+name: Areas
+vid: areas
+description: ''
+weight: 0

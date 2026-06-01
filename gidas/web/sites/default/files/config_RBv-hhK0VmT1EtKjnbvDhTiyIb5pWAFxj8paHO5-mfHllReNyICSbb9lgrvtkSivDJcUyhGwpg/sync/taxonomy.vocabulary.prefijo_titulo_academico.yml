@@ -1,0 +1,8 @@
+uuid: 251cbc44-a1b9-4e2b-a8fa-4631c7250305
+langcode: es
+status: true
+dependencies: {  }
+name: 'Prefijo Título Académico'
+vid: prefijo_titulo_academico
+description: 'Es el prefijo del máximo título académico obtenido'
+weight: 0

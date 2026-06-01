@@ -1,0 +1,20 @@
+uuid: 971f914c-36c7-46f7-8237-fad6b20bb9a5
+langcode: es
+status: true
+dependencies:
+  module:
+    - taxonomy
+    - user
+id: user.field_integrantes_titulo
+field_name: field_integrantes_titulo
+entity_type: user
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

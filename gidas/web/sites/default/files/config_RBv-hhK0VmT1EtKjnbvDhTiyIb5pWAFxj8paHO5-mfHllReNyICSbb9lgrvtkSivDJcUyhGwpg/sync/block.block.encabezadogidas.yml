@@ -1,0 +1,34 @@
+uuid: 88cd5021-0958-464d-baca-71a259dc801b
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:0a482e04-c8a7-4246-a3a6-c4a233d761a3'
+  module:
+    - block_class
+    - block_content
+    - system
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: 'bg-degrade-rojo position-relative pt-5 pb-8 pt-lg-10 pb-lg-15 text-white mb-3'
+id: encabezadogidas
+theme: gidas_b5
+region: slideshow
+weight: 0
+provider: null
+plugin: 'block_content:0a482e04-c8a7-4246-a3a6-c4a233d761a3'
+settings:
+  id: 'block_content:0a482e04-c8a7-4246-a3a6-c4a233d761a3'
+  label: 'Encabezado gidas'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

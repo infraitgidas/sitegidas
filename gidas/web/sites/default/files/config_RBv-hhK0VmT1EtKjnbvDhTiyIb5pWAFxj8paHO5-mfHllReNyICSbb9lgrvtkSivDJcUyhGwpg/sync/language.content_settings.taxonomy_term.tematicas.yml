@@ -1,0 +1,11 @@
+uuid: e978d604-9b91-45de-b70d-9e26c4811361
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.tematicas
+id: taxonomy_term.tematicas
+target_entity_type_id: taxonomy_term
+target_bundle: tematicas
+default_langcode: site_default
+language_alterable: false

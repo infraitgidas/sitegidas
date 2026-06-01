@@ -1,0 +1,16 @@
+# === BACKUPS Y DATOS PERSISTENTES ===
+*.sql
+*.sql.gz
+backups/
+data/
+
+secrets/
+
+# === CONFIGURACIONES LOCALES / PRODUCCIÓN ===
+docker-compose.override.yml
+.env
+.env.*
+
+# === SISTEMA ===
+.DS_Store
+Thumbs.db

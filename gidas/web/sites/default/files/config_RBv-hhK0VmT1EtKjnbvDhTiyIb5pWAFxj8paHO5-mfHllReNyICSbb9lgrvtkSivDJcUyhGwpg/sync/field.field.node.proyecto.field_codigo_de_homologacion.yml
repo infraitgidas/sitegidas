@@ -1,0 +1,19 @@
+uuid: 3443464b-6457-40d7-8d79-bb5ffa76e445
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_codigo_de_homologacion
+    - node.type.proyecto
+id: node.proyecto.field_codigo_de_homologacion
+field_name: field_codigo_de_homologacion
+entity_type: node
+bundle: proyecto
+label: 'Código de Homologación'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

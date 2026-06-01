@@ -1,0 +1,29 @@
+uuid: 6d631cba-f9b6-43cb-a080-53ebf8b51ff4
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:6beb50ad-0842-488c-8e64-b49dfeb379d8'
+  module:
+    - block_class
+    - block_content
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: 'col-10 offset-1 col-lg-6 offset-lg-0 d-flex justify-content-lg-end'
+id: redes
+theme: gidas_b5
+region: footer
+weight: -5
+provider: null
+plugin: 'block_content:6beb50ad-0842-488c-8e64-b49dfeb379d8'
+settings:
+  id: 'block_content:6beb50ad-0842-488c-8e64-b49dfeb379d8'
+  label: Redes
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

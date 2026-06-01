@@ -1,0 +1,29 @@
+uuid: 0ac7bfb4-f9ca-4a02-8675-0e484e8cf29d
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:da6a7e07-348f-4f58-8bfe-519d8f0cd0e9'
+  module:
+    - block_class
+    - block_content
+  theme:
+    - gidas_b5
+third_party_settings:
+  block_class:
+    classes: 'col-10 offset-1 col-lg-6 offset-lg-0 text-white'
+id: pie
+theme: gidas_b5
+region: footer
+weight: -7
+provider: null
+plugin: 'block_content:da6a7e07-348f-4f58-8bfe-519d8f0cd0e9'
+settings:
+  id: 'block_content:da6a7e07-348f-4f58-8bfe-519d8f0cd0e9'
+  label: 'Logo pie'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

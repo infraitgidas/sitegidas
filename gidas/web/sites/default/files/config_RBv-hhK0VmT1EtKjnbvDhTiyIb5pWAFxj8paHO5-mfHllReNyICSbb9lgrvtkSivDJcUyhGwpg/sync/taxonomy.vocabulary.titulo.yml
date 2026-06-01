@@ -1,0 +1,8 @@
+uuid: e3a298f1-1999-43f7-90ff-05b88ddb1056
+langcode: es
+status: true
+dependencies: {  }
+name: 'Formación Académica'
+vid: titulo
+description: 'Títulos Académicos. Por ej. Doctor en Ciencias Informáticas, Magister en Tecnología Informática Aplicada en Educación'
+weight: 0
