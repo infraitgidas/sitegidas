@@ -1,8 +1,7 @@
 services:
   nginx:
-    ports:
-      - "80:80"
-      - "443:443"
+    expose:
+      - "80"
     volumes:
       - ./docker/nginx/ssl:/etc/nginx/ssl:ro
     environment:
@@ -15,7 +14,12 @@ services:
         reservations:
           cpus: '0.25'
           memory: 128M
-
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gidas_web.rule=Host(`192.168.1.106`)"
+      - "traefik.http.routers.gidas_web.entrypoints=web"
+      - "traefik.http.services.gidas_web.loadbalancer.server.port=80"
+      - "traefik.docker.network=gidas-docker_gidas_network"
   php:
     environment:
       PHP_MEMORY_LIMIT: 512M
@@ -39,6 +43,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
       MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_PASSWORD: ""
     secrets:
       - db_root_password
       - db_password
@@ -57,10 +63,13 @@ services:
 
   # Agregar Traefik para SSL automático y balanceo
   traefik:
-    image: traefik:v2.10
+    image: traefik:v2.11
     container_name: gidas_traefik
+    environment:
+      - DOCKER_API_VERSION=1.44
     restart: unless-stopped
     command:
+      - "--log.level=DEBUG"
       - "--api.dashboard=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -82,8 +91,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.rule=Host(`traefik.gidas.frlp.utn.edu.ar`)"
       - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.traefik.middlewares=auth@file"
+#      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+#      - "traefik.http.routers.traefik.middlewares=auth@file"
 
 secrets:
   db_root_password:
