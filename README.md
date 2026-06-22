@@ -122,17 +122,6 @@ cp .env.example .env
 nano .env  # o vim, vscode, etc.
 ```
 
-**Variables críticas a configurar:**
-```ini
-DB_ROOT_PASSWORD=password_seguro_root
-DB_NAME=gidas
-DB_USER=gidas-db
-DB_PASSWORD=cristal2022
-ENVIRONMENT=development
-```
-
-### 3. Iniciar Servicios
-
 ```bash
 # Construir e iniciar
 docker compose up -d --build
