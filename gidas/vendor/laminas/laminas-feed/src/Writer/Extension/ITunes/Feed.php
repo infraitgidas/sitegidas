@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Feed\Writer\Extension\ITunes;
 
 use Laminas\Feed\Uri;
@@ -11,12 +13,11 @@ use function array_key_exists;
 use function count;
 use function ctype_alpha;
 use function ctype_digit;
-use function get_class;
+use function get_debug_type;
 use function implode;
 use function in_array;
 use function is_array;
 use function is_bool;
-use function is_object;
 use function is_string;
 use function lcfirst;
 use function method_exists;
@@ -26,7 +27,6 @@ use function strlen;
 use function substr;
 use function trigger_error;
 use function ucfirst;
-use function var_export;
 
 use const E_USER_DEPRECATED;
 
@@ -85,7 +85,7 @@ class Feed
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
      * @param string $value
-     * @return self
+     * @return $this
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesBlock($value)
@@ -403,7 +403,7 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "type" MUST be one of [%s]; received %s',
                 implode(', ', $validTypes),
-                is_object($type) ? get_class($type) : var_export($type, true)
+                get_debug_type($type),
             ));
         }
         $this->data['type'] = $type;
@@ -422,7 +422,7 @@ class Feed
         if (! is_bool($status)) {
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "complete" MUST be boolean; received %s',
-                is_object($status) ? get_class($status) : var_export($status, true)
+                get_debug_type($status),
             ));
         }
 

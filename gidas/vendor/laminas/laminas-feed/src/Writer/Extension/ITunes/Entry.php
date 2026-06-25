@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Laminas\Feed\Writer\Extension\ITunes;
 
 use Laminas\Feed\Uri;
@@ -11,14 +13,12 @@ use function array_key_exists;
 use function count;
 use function ctype_alpha;
 use function ctype_digit;
-use function get_class;
-use function gettype;
+use function get_debug_type;
 use function implode;
 use function in_array;
 use function is_bool;
 use function is_float;
 use function is_numeric;
-use function is_object;
 use function is_string;
 use function lcfirst;
 use function method_exists;
@@ -28,7 +28,6 @@ use function strlen;
 use function substr;
 use function trigger_error;
 use function ucfirst;
-use function var_export;
 
 use const E_USER_DEPRECATED;
 
@@ -324,7 +323,7 @@ class Entry
         if (! is_numeric($number) || is_float($number)) {
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "number" may only be an integer; received %s',
-                is_object($number) ? get_class($number) : gettype($number)
+                get_debug_type($number),
             ));
         }
 
@@ -347,7 +346,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "episodeType" MUST be one of the strings [%s]; received %s',
                 implode(', ', $validTypes),
-                is_object($type) ? get_class($type) : var_export($type, true)
+                get_debug_type($type),
             ));
         }
 
@@ -368,7 +367,7 @@ class Entry
         if (! is_bool($status)) {
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "isClosedCaptioned" MUST be a boolean; received %s',
-                is_object($status) ? get_class($status) : var_export($status, true)
+                get_debug_type($status),
             ));
         }
 
@@ -393,7 +392,7 @@ class Entry
         if (! is_numeric($number) || is_float($number)) {
             throw new Writer\Exception\InvalidArgumentException(sprintf(
                 'invalid parameter: "season" may only be an integer; received %s',
-                is_object($number) ? get_class($number) : gettype($number)
+                get_debug_type($number),
             ));
         }
 

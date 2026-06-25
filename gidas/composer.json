@@ -24,7 +24,7 @@
         "drupal/colorbox": "^1.8",
         "drupal/console": "^1.9",
         "drupal/core-composer-scaffold": "^9.3",
-        "drupal/core-recommended": "^9.3",
+        "drupal/core-recommended": "^9.5",
         "drupal/easy_breadcrumb": "^2.0",
         "drupal/eva": "^2.1",
         "drupal/field_formatter_class": "^1.5",
