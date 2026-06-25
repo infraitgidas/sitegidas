@@ -57,24 +57,62 @@
 
 - [ ] Confirmar que la Fase 0 del otro roadmap está completa antes de seguir.
 
-### Fase 1 — Auditoría de módulos (el paso que define la complejidad real)
+### Fase 1 — Auditoría de módulos (el paso que define la complejidad real) ✅ COMPLETADA
 
-Este es el paso más importante de todo el roadmap: determina si la actualización es de días o de semanas.
+Resultado real obtenido con `drupal/upgrade_status` el 25/06/2026. **Conclusión clave: no hay módulos custom (carpeta `custom` no existe), pero sí hay un tema custom (`gidas_b5`) que requiere revisión.**
 
-- [ ] Listar todos los módulos contrib instalados:
-  ```bash
-  docker compose exec php drush pm:list --type=module --status=enabled
-  ```
-- [ ] Revisar `gidas/web/modules/custom` y documentar qué hace cada módulo custom y qué APIs de Drupal usa.
-- [ ] Para cada módulo contrib, verificar compatibilidad con Drupal 10 en su página de drupal.org (buscar el módulo + "drupal 10 compatible").
-- [ ] Usar el módulo **Upgrade Status** (`drupal/upgrade_status`) para generar un reporte automático de compatibilidad:
-  ```bash
-  docker compose exec php composer require drupal/upgrade_status --dev
-  docker compose exec php drush en upgrade_status -y
-  ```
-  Revisar el reporte desde `/admin/reports/upgrade-status`.
-- [ ] Clasificar cada módulo en: ✅ compatible / ⚠️ necesita actualización / 🔴 sin mantenimiento (hay que reemplazarlo o reescribirlo).
-- [ ] Si hay módulos 🔴, decidir reemplazo o reescritura **antes** de avanzar — esto es lo que más tiempo consume.
+#### Hallazgos adicionales del Status Report (fuera de módulos, pero relevantes)
+- 🔴 Directorio `sites/default` sin protección de escritura (riesgo de seguridad).
+- 🔴 Módulo **Color** deprecado en core, será removido en próxima major.
+- 🔴 Drush en versión 10; Drupal 10 exige **mínimo Drush 11**.
+- ⚠️ PHP ya está en **8.1.34** (no 7.4 como indicaba el README desactualizado) — un paso menos en el roadmap.
+- ⚠️ Drupal core en 9.4.8, recomendado subir primero a 9.5.11 antes de tocar D10.
+
+#### 🔴 Bloqueantes reales (incompatibles, sin upgrade simple disponible)
+
+| Proyecto | Tipo | Problemas | Acción definida |
+|---|---|---|---|
+| `gidas_b5` | **Tema custom** | 2 | Revisar y corregir manualmente (código propio, bajo volumen) |
+| `ckeditor_codemirror` | Contrib | 5 | Desinstalar al migrar a CKEditor 5 (no reparar) |
+| `flexslider` | Contrib | 63 | Reemplazar por Slick o Splide (sin solución oficial D10/D11) |
+
+#### ⚠️ Necesitan actualizar versión (compatibles, solo desactualizados)
+
+| Módulo | Versión local | Versión objetivo |
+|---|---|---|
+| block_class | 8.x-1.3 | 4.0.2 |
+| colorbox | 8.x-1.10 | 2.2.0 |
+| eva | 8.x-2.1 | 3.1.1 |
+| focal_point | 8.x-1.5 | 2.1.2 |
+| realname | 2.0.0-beta1 | 2.0.0 |
+| scrollup | 3.0.0 | 3.0.4 |
+| svg_image | 8.x-1.16 | 3.2.3 |
+| taxonomy_manager | 2.0.7 | 2.0.23 |
+| token_filter | 8.x-1.4 | 2.2.1 |
+| userprotect | 8.x-1.1 | 8.x-1.4 |
+| bootstrap5 (tema) | 1.1.5 | 4.0.8 |
+
+#### ✅ Ya compatibles, sin acción urgente
+ckeditor (CKEditor 4, contrib), admin_toolbar, crop, ctools, easy_breadcrumb, entity_reference_revisions, field_formatter_class, field_group, field_label, filefield_paths, jquery_ui, paragraphs, pathauto, token, views_bootstrap.
+
+#### 🗑️ Limpieza
+`field_tokens` — desinstalado pero sigue en composer.json. Remover si no se usa.
+
+#### Checklist de ejecución de esta fase
+
+- [x] Listar módulos contrib instalados (`drush pm:list`).
+- [x] Confirmar que no hay módulos custom (solo tema custom `gidas_b5`).
+- [x] Instalar y correr `drupal/upgrade_status`.
+- [x] Clasificar todos los proyectos en 🔴 / ⚠️ / ✅.
+- [ ] Asegurar permisos de `sites/default` (no escribible).
+- [ ] Actualizar Drush a v11.
+- [ ] Desinstalar módulo Color.
+- [ ] Actualizar Drupal core 9.4.8 → 9.5.11.
+- [ ] Actualizar los 11 módulos/tema de la tabla ⚠️.
+- [ ] Revisar y corregir los 2 problemas del tema `gidas_b5`.
+- [ ] Definir y ejecutar reemplazo de FlexSlider (Slick/Splide).
+- [ ] Confirmar desinstalación de `ckeditor_codemirror` en la fase de CKEditor 5.
+- [ ] Re-correr Upgrade Status para confirmar que solo quedan los 3 bloqueantes pendientes de la fase de migración a D10.
 
 ### Fase 2 — Entorno de staging (espejo de producción)
 

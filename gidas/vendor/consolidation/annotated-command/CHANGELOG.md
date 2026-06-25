@@ -1,5 +1,50 @@
 # Change Log
 
+### 4.10.5 - 28 Mar 2026
+
+- Support Symfony 8
+
+### 4.10.3, 4.10.4 - 14 Nov 2025
+
+- PHP 8.5 support
+
+### 4.10.2 - 16 Jul 2025
+
+- Fix a PHP 8.4 deprecation (fputcsv default args).
+
+### 4.10.1 - 13 Dec 2024
+
+- Support PHP 8.4
+
+### 4.10.0 - 5 Apr 2024
+
+- Support Symfony 7
+
+### 4.9.2 - 26 Dec 2023
+
+- Avoid infinite loop in \Consolidation\AnnotatedCommand\Parser\CommandInfo::getName (#306)
+
+### 4.9.1, 4.9.0 - 19 May 2023
+
+- Inject command metadata: make AnnotationData and FormatterOptions available (#301)
+- Only call setHidden() if value is true. (#299)
+
+### 4.8.2 - 11 March 2023
+
+- Fix bug with simple options with dashes in their names. (#295)
+- Add new public ->addOption() method (#294)
+- Attributes - Topic needs path (#293)
+- More robust hook attribute, and misc (#291)
+
+### 4.8.0, 4.8.1 - 28 February 2023
+
+- Add HookSelector attribute and adjust Hook attribute accordingly (#290)
+- Allow for just one param to be passed in Help and Topics Attributes (#289)
+
+### 4.7.1 - 6 December 2022
+
+- PHP 8.2 fixes
+
 ### 4.7.0 - 22 November 2022
 
 - Allow command help and descriptions to be defined via docblock comments (#281)

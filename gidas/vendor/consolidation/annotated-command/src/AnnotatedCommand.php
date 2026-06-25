@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputAwareInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Consolidation\OutputFormatters\Options\FormatterOptions;
 
 /**
  * AnnotatedCommands are created automatically by the
@@ -258,7 +259,9 @@ class AnnotatedCommand extends Command implements HelpDocumentAlter
             // Alas, Symfony provides no accessor.
             $class = new \ReflectionClass($inputOption);
             $property = $class->getProperty('suggestedValues');
-            $property->setAccessible(true);
+            if (\PHP_VERSION_ID < 80100) {
+                $property->setAccessible(true);
+            }
             $suggestedValues = $property->getValue($inputOption);
         }
         $this->addOption(
@@ -355,7 +358,7 @@ class AnnotatedCommand extends Command implements HelpDocumentAlter
     /**
      * {@inheritdoc}
      */
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact(InputInterface $input, OutputInterface $output): void
     {
         $state = $this->injectIntoCommandfileInstance($input, $output);
         $this->commandProcessor()->interact(
@@ -367,7 +370,7 @@ class AnnotatedCommand extends Command implements HelpDocumentAlter
         $state->restore();
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $state = $this->injectIntoCommandfileInstance($input, $output);
         // Allow the hook manager a chance to provide configuration values,
@@ -379,7 +382,7 @@ class AnnotatedCommand extends Command implements HelpDocumentAlter
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $state = $this->injectIntoCommandfileInstance($input, $output);
         // Validate, run, process, alter, handle results.
@@ -428,6 +431,9 @@ class AnnotatedCommand extends Command implements HelpDocumentAlter
             $output,
             $this->parameterMap
         );
+
+        $formatterOptions = new FormatterOptions($commandData->annotationData()->getArrayCopy(), $commandData->input()->getOptions());
+        $commandData->setFormatterOptions($formatterOptions);
 
         // Fetch any classes (e.g. InputInterface / OutputInterface) that
         // this command's callback wants passed as a parameter and inject
