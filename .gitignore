@@ -4,6 +4,7 @@
 backups/
 data/
 
+letsencrypt/
 secrets/
 
 # === CONFIGURACIONES LOCALES / PRODUCCIÓN ===

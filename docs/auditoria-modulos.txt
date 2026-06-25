@@ -1,0 +1,87 @@
+ ------------------ ----------------------------------- --------- ------------- 
+  Package            Name                                Status    Version      
+ ------------------ ----------------------------------- --------- ------------- 
+  Core               Automated Cron (automated_cron)     Enabled   9.4.8        
+  Core               BigPipe (big_pipe)                  Enabled   9.4.8        
+  Core               Block (block)                       Enabled   9.4.8        
+  Core               Custom Block (block_content)        Enabled   9.4.8        
+  Core               Breakpoint (breakpoint)             Enabled   9.4.8        
+  Other              CKEditor 4 (contrib) (ckeditor)     Enabled   1.0.1        
+  Core               Color (color)                       Enabled   9.4.8        
+  Core               Comment (comment)                   Enabled   9.4.8        
+  Core               Configuration Manager (config)      Enabled   9.4.8        
+  Core               Contact (contact)                   Enabled   9.4.8        
+  Core               Contextual Links (contextual)       Enabled   9.4.8        
+  Field types        Datetime (datetime)                 Enabled   9.4.8        
+  Core               Database Logging (dblog)            Enabled   9.4.8        
+  Core               Internal Dynamic Page Cache         Enabled   9.4.8        
+                     (dynamic_page_cache)                                       
+  Core               Text Editor (editor)                Enabled   9.4.8        
+  Core               Field (field)                       Enabled   9.4.8        
+  Core               Field UI (field_ui)                 Enabled   9.4.8        
+  Field types        File (file)                         Enabled   9.4.8        
+  Core               Filter (filter)                     Enabled   9.4.8        
+  Core               Help (help)                         Enabled   9.4.8        
+  Core               History (history)                   Enabled   9.4.8        
+  Field types        Image (image)                       Enabled   9.4.8        
+  Multilingual       Language (language)                 Enabled   9.4.8        
+  Field types        Link (link)                         Enabled   9.4.8        
+  Multilingual       Interface Translation (locale)      Enabled   9.4.8        
+  Core               Custom Menu Links                   Enabled   9.4.8        
+                     (menu_link_content)                                        
+  Core               Menu UI (menu_ui)                   Enabled   9.4.8        
+  Core               MySQL (mysql)                       Enabled   9.4.8        
+  Core               Node (node)                         Enabled   9.4.8        
+  Field types        Options (options)                   Enabled   9.4.8        
+  Core               Internal Page Cache (page_cache)    Enabled   9.4.8        
+  Core               Path (path)                         Enabled   9.4.8        
+  Core               Path alias (path_alias)             Enabled   9.4.8        
+  Core               RDF (rdf)                           Enabled   9.4.8        
+  Core               Search (search)                     Enabled   9.4.8        
+  Core               Shortcut (shortcut)                 Enabled   9.4.8        
+  Core               System (system)                     Enabled   9.4.8        
+  Core               Taxonomy (taxonomy)                 Enabled   9.4.8        
+  Field types        Text (text)                         Enabled   9.4.8        
+  Core               Toolbar (toolbar)                   Enabled   9.4.8        
+  Core               Tour (tour)                         Enabled   9.4.8        
+  Core               Update Manager (update)             Enabled   9.4.8        
+  Core               User (user)                         Enabled   9.4.8        
+  Core               Views (views)                       Enabled   9.4.8        
+  Core               Views UI (views_ui)                 Enabled   9.4.8        
+  Administration     Admin Toolbar (admin_toolbar)       Enabled   3.3.0        
+  Administration     Admin Toolbar Extra Tools           Enabled   3.3.0        
+                     (admin_toolbar_tools)                                      
+  User Interface     Block Class (block_class)           Enabled   8.x-1.3      
+  CKEditor           CKEditor CodeMirror                 Enabled                
+                     (ckeditor_codemirror)                                      
+  Media              Colorbox (colorbox)                 Enabled   8.x-1.10     
+  Media              Crop API (crop)                     Enabled   8.x-2.3      
+  Chaos tool suite   Chaos Tools (ctools)                Enabled   4.0.3        
+  Navigation         Easy Breadcrumb (easy_breadcrumb)   Enabled   2.0.4        
+  Field types        Entity Reference Revisions          Enabled   8.x-1.10     
+                     (entity_reference_revisions)                               
+  Views              Eva (eva)                           Enabled   8.x-2.1      
+  Field Formatters   Field Formatter Class               Enabled   8.x-1.6      
+                     (field_formatter_class)                                    
+  Fields             Field Group (field_group)           Enabled   8.x-3.4      
+  Field Formatters   Field Label (field_label)           Enabled   8.x-1.2      
+  Fields             File (Field) Paths                  Enabled                
+                     (filefield_paths)                                          
+  FlexSlider         FlexSlider (flexslider)             Enabled                
+  FlexSlider         FlexSlider Views Style              Enabled                
+                     (flexslider_views)                                         
+  Media              Focal Point (focal_point)           Enabled   8.x-1.5      
+  jQuery UI          jQuery UI (jquery_ui)               Enabled   8.x-1.6      
+  Paragraphs         Paragraphs (paragraphs)             Enabled   8.x-1.15     
+  Other              Pathauto (pathauto)                 Enabled   8.x-1.11     
+  Other              Real Name (realname)                Enabled   2.0.0-beta1  
+  Other              Scrollup (scrollup)                 Enabled   3.0.0        
+  Media              SVG image (svg_image)               Enabled   8.x-1.16     
+  Taxonomy           Taxonomy Manager                    Enabled   2.0.7        
+                     (taxonomy_manager)                                         
+  Other              Token (token)                       Enabled   8.x-1.11     
+  Other              Token Filter (token_filter)         Enabled   8.x-1.4      
+  Other              User Protect (userprotect)          Enabled   8.x-1.1      
+  Views              Views Bootstrap 4                   Enabled                
+                     (views_bootstrap)                                          
+ ------------------ ----------------------------------- --------- ------------- 

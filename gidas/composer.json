@@ -53,7 +53,15 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/console-extend-plugin": true,
+            "drupal/core-composer-scaffold": true,
+            "wikimedia/composer-merge-plugin": true,
+            "wikimedia/composer-installers": true
+        }
     },
     "extra": {
         "enable-patching": true,
@@ -122,5 +130,8 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "drupal/upgrade_status": "^4.3"
     }
 }
