@@ -14,7 +14,7 @@ class InstallTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [];
+  protected static $modules = [];
 
   /**
    * Module handler to ensure installed modules.
@@ -38,7 +38,7 @@ class InstallTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
     $this->moduleHandler = $this->container->get('module_handler');
     $this->moduleInstaller = $this->container->get('module_installer');
@@ -62,14 +62,11 @@ class InstallTest extends BrowserTestBase {
     // Ensure an authenticated user can edit its own account.
     $this->drupalLogin($account);
     $this->drupalGet('user/' . $account->id() . '/edit');
-    $this->assertResponse(200, 'Authenticated user has access to edit page of own account.');
+    $this->assertSession()->statusCodeEquals(200);
 
     // Uninstall userprotect.
     $this->moduleInstaller->uninstall(['userprotect']);
 
-    // Workaround https://www.drupal.org/node/2021959
-    // See \Drupal\Core\Test\FunctionalTestSetupTrait::rebuildContainer.
-    unset($this->moduleHandler);
     $this->rebuildContainer();
     $this->moduleHandler = $this->container->get('module_handler');
 

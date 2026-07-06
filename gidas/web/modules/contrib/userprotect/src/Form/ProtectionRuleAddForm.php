@@ -43,8 +43,9 @@ class ProtectionRuleAddForm extends ProtectionRuleFormBase {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    parent::save($form, $form_state);
+    $result = parent::save($form, $form_state);
     $this->messenger->addMessage($this->t('Added protection rule %name.', ['%name' => $this->entity->label()]));
+    return $result;
   }
 
 }

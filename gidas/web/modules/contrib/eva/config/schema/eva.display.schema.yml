@@ -20,3 +20,6 @@ views.display.entity_view:
     default_argument:
       type: string
       label: 'Argument'
+    eva_hide_empty:
+      type: boolean
+      label: 'Hide output if the view is empty'

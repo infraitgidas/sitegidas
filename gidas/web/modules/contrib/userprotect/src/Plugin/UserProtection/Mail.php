@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @UserProtection(
  *   id = "user_mail",
- *   label = @Translation("E-mail address"),
+ *   label = @Translation("Email address"),
  *   weight = -9
  * )
  */

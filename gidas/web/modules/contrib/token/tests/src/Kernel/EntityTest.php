@@ -12,12 +12,19 @@ use Drupal\taxonomy\VocabularyInterface;
  *
  * @group token
  */
-class EntityTest extends KernelTestBase {
+class EntityTest extends TokenKernelTestBase {
 
   /**
    * {@inheritdoc}
    */
   protected static $modules = ['node', 'taxonomy', 'text'];
+
+  /**
+   * Vocabulary for testing chained token support.
+   *
+   * @var \Drupal\taxonomy\VocabularyInterface
+   */
+  protected $vocabulary;
 
   /**
    * {@inheritdoc}
@@ -26,17 +33,15 @@ class EntityTest extends KernelTestBase {
     parent::setUp();
 
     // Create the default tags vocabulary.
-    $vocabulary = Vocabulary::create([
+    $this->vocabulary = Vocabulary::create([
       'name' => 'Tags',
       'vid' => 'tags',
     ]);
-    $vocabulary->save();
+    $this->vocabulary->save();
 
     $this->installEntitySchema('taxonomy_term');
     $this->installEntitySchema('user');
     $this->installEntitySchema('node');
-
-    $this->vocab = $vocabulary;
   }
 
   function testEntityMapping() {
@@ -45,12 +50,12 @@ class EntityTest extends KernelTestBase {
     $this->assertSame('node', $mapper->getEntityTypeForTokenType('node'));
     $this->assertSame('taxonomy_term', $mapper->getEntityTypeForTokenType('term'));
     $this->assertSame('taxonomy_vocabulary', $mapper->getEntityTypeForTokenType('vocabulary'));
-    $this->assertSame(FALSE, $mapper->getEntityTypeForTokenType('invalid'));
+    $this->assertFalse($mapper->getEntityTypeForTokenType('invalid'));
     $this->assertSame('invalid', $mapper->getEntityTypeForTokenType('invalid', TRUE));
     $this->assertSame('node', $mapper->getTokenTypeForEntityType('node'));
     $this->assertSame('term', $mapper->getTokenTypeForEntityType('taxonomy_term'));
     $this->assertSame('vocabulary', $mapper->getTokenTypeForEntityType('taxonomy_vocabulary'));
-    $this->assertSame(FALSE, $mapper->getTokenTypeForEntityType('invalid'));
+    $this->assertFalse($mapper->getTokenTypeForEntityType('invalid'));
     $this->assertSame('invalid', $mapper->getTokenTypeForEntityType('invalid', TRUE));
 
     // Test that when we send the mis-matched entity type into
@@ -88,7 +93,7 @@ class EntityTest extends KernelTestBase {
     $this->assertTokens('node', ['node' => $node], $tokens);
 
     // Emulate the original entity property that would be available from
-    // node_save() and change the title for the node.
+    // during node save and change the title for the node.
     $node->original = \Drupal::entityTypeManager()->getStorage('node')->loadUnchanged($node->id());
     $node->title = 'New title';
 

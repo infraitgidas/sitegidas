@@ -24,10 +24,14 @@ class UnsavedUserFieldAccessTest extends UserProtectBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
-    $this->account = $this->drupalCreateUser(['administer users', 'administer permissions']);
+    $this->account = $this->drupalCreateUser(
+      [
+        'administer users',
+        'administer permissions',
+      ]);
     $this->drupalLogin($this->account);
   }
 
@@ -44,8 +48,9 @@ class UnsavedUserFieldAccessTest extends UserProtectBrowserTestBase {
       'pass[pass2]' => $pass,
       'notify' => FALSE,
     ];
-    $this->drupalPostForm('admin/people/create', $edit, t('Create new account'));
-    $this->assertSession()->pageTextContains(t('Created a new user account for @name. No email has been sent.', ['@name' => $edit['name']]), 'User created');
+    $this->drupalGet('admin/people/create');
+    $this->submitForm($edit, 'Create new account');
+    $this->assertSession()->pageTextContains(strtr('Created a new user account for @name. No email has been sent.', ['@name' => $edit['name']]));
 
     // Try to create an user with the same name and assert that it doesn't
     // result into a fatal error.
@@ -56,8 +61,9 @@ class UnsavedUserFieldAccessTest extends UserProtectBrowserTestBase {
       'pass[pass2]' => $pass,
       'notify' => FALSE,
     ];
-    $this->drupalPostForm('admin/people/create', $edit, t('Create new account'));
-    $this->assertSession()->pageTextContains(t('The username @name is already taken.', ['@name' => $edit['name']]));
+    $this->drupalGet('admin/people/create');
+    $this->submitForm($edit, 'Create new account');
+    $this->assertSession()->pageTextContains(strtr('The username @name is already taken.', ['@name' => $edit['name']]));
   }
 
   /**
@@ -72,7 +78,6 @@ class UnsavedUserFieldAccessTest extends UserProtectBrowserTestBase {
 
     // The logged in user should have the privileges to edit the unsaved user's
     // name.
-    $this->assertTrue($unsavedUserEntity->isAnonymous(), 'Unsaved user is considered anonymous when userprotect is installed.');
     $this->assertTrue($unsavedUserEntity->get('name')->access('edit'), 'Logged in user is allowed to edit name field when userprotect is installed.');
 
     // Uninstall userprotect and verify that logged in user has privileges to
@@ -85,7 +90,6 @@ class UnsavedUserFieldAccessTest extends UserProtectBrowserTestBase {
     $module_handler = $this->container->get('module_handler');
 
     $this->assertFalse($module_handler->moduleExists('userprotect'), 'Userprotect uninstalled successfully.');
-    $this->assertTrue($unsavedUserEntity->isAnonymous(), 'Unsaved user is considered anonymous when userprotect is uninstalled.');
     $this->assertTrue($unsavedUserEntity->get('name')->access('edit'), 'Logged in user is allowed to edit name field when userprotect is uninstalled.');
   }
 

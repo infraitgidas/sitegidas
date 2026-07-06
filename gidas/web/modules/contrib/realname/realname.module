@@ -14,6 +14,7 @@ use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Link;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -216,8 +217,13 @@ function realname_update(User $account) {
     // Perform token replacement on the real name pattern.
     $realname = \Drupal::token()->replace($pattern,
         ['user' => $account],
-        ['clear' => TRUE, 'sanitize' => FALSE]
+        ['clear' => TRUE, 'sanitize' => FALSE],
+        new BubbleableMetadata()
     );
+
+    // Process TWIG.
+    $twig_service = \Drupal::service('twig');
+    $realname = $twig_service->renderInline($realname);
 
     // Remove any HTML tags.
     $realname = strip_tags(Html::decodeEntities($realname));
@@ -239,7 +245,7 @@ function realname_update(User $account) {
 
   // Save to the database and the static cache.
   \Drupal::database()->merge('realname')
-    ->key(['uid' => $account->id()])
+    ->key('uid', $account->id())
     ->fields([
       'realname' => $realname,
       'created' => \Drupal::time()->getRequestTime(),

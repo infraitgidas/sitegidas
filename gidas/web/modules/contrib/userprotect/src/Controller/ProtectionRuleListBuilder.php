@@ -2,10 +2,10 @@
 
 namespace Drupal\userprotect\Controller;
 
-use Drupal\userprotect\Entity\ProtectionRuleInterface;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\userprotect\Entity\ProtectionRuleInterface;
 
 /**
  * Provides a listing of protection rules.

@@ -11,5 +11,5 @@ services:
       - ../eva_test:/app/web/modules/custom/eva_test:ro
       - web:/app/web
 
-volumes:
-  web:
+# volumes:
+  # web:

@@ -23,29 +23,15 @@ function scrollup_help($route_name, RouteMatchInterface $route_match) {
 }
 
 /**
- * Implements hook_install().
- */
-function scrollup_install() {
-  $defaultThemeName = \Drupal::config('system.theme')->get('default');
-  \Drupal::configFactory()->getEditable('scrollup.settings')
-    ->set('scrollup_position', 1)
-    ->set('scrollup_button_bg_color', '#CCCCCC')
-    ->set('scrollup_button_hover_bg_color', '#000000')
-    ->set('scrollup_title', 'Scroll up')
-    ->set('scrollup_window_position', '600')
-    ->set('scrollup_speed', '0')
-    ->set('scrollup_themename', [$defaultThemeName])
-    ->save();
-}
-
-/**
  * Implements hook_preprocess_page().
  */
 function scrollup_preprocess_page(&$variables) {
 
   $config = \Drupal::config('scrollup.settings');
   $theme_selected = $config->get('scrollup_themename');
-  $active_theme = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+  $active_theme = \Drupal::service('theme.manager')
+    ->getActiveTheme()
+    ->getName();
   if (array_keys($theme_selected, $active_theme)) {
     $variables['#attached']['library'][] = 'scrollup/scrollup';
     $variables['#attached']['drupalSettings']['scrollup_position'] = $config->get('scrollup_position');

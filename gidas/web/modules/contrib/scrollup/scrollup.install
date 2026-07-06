@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Provides install, uninstall, and update functions for scrollup.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function scrollup_install() {
+  $defaultThemeName = \Drupal::config('system.theme')->get('default');
+  \Drupal::configFactory()->getEditable('scrollup.settings')
+    ->set('scrollup_position', 1)
+    ->set('scrollup_button_bg_color', '#CCCCCC')
+    ->set('scrollup_button_hover_bg_color', '#000000')
+    ->set('scrollup_title', 'Scroll up')
+    ->set('scrollup_window_position', '600')
+    ->set('scrollup_speed', '0')
+    ->set('scrollup_themename', [$defaultThemeName])
+    ->save();
+}

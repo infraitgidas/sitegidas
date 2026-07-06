@@ -9,8 +9,8 @@
 build:
   assessment:
     validate_codebase:
-      phplint:
-      container_composer:
+      # phplint:
+      # container_composer:
       phpcs:
         # phpcs will use core's specified version of Coder.
         sniff-all-files: true
@@ -29,4 +29,3 @@ build:
         testgroups: '--all'
         suppress-deprecations: false
       nightwatchjs: {  }
-

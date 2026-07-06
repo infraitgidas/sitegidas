@@ -6,7 +6,6 @@ namespace Drupal\Tests\userprotect\Functional;
  * Tests each UserProtection plugin in action.
  *
  * @group userprotect
- * @todo Assert protection messages.
  */
 class UserProtectionTest extends UserProtectBrowserTestBase {
 
@@ -20,10 +19,14 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
-    $this->account = $this->drupalCreateUser(['administer users', 'administer permissions']);
+    $this->account = $this->drupalCreateUser(
+      [
+        'administer users',
+        'administer permissions',
+      ]);
     $this->drupalLogin($this->account);
   }
 
@@ -35,6 +38,23 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
 
     $this->drupalGet('user/' . $protected_account->id() . '/edit');
     $this->assertSession()->fieldNotExists('name');
+    $this->assertSession()->pageTextContains($protected_account->getAccountName() . ' has been protected from the following editing operations: Username');
+  }
+
+  /**
+   * Tests username protection without message.
+   */
+  public function testNameProtectionWithoutMessage() {
+    \Drupal::configFactory()->getEditable('userprotect.settings')
+      ->set('display_applied_protections_message', FALSE)
+      ->save();
+
+    $protected_account = $this->createProtectedUser(['user_name']);
+
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    $this->assertSession()->fieldNotExists('name');
+    $this->assertSession()->elementNotExists('css', '.messages');
+    $this->assertSession()->pageTextNotContains('has been protected');
   }
 
   /**
@@ -44,7 +64,34 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
     $protected_account = $this->createProtectedUser(['user_mail']);
 
     $this->drupalGet('user/' . $protected_account->id() . '/edit');
-    $this->assertSession()->fieldDisabled('mail');
+    if (version_compare(\Drupal::VERSION, '10.1.0', '>=')) {
+      $this->assertSession()->fieldNotExists('mail');
+    }
+    else {
+      $this->assertSession()->fieldDisabled('mail');
+    }
+    $this->assertSession()->pageTextContains($protected_account->getAccountName() . ' has been protected from the following editing operations: Email address');
+  }
+
+  /**
+   * Tests mail address protection without message.
+   */
+  public function testMailProtectionWithoutMessage() {
+    \Drupal::configFactory()->getEditable('userprotect.settings')
+      ->set('display_applied_protections_message', FALSE)
+      ->save();
+
+    $protected_account = $this->createProtectedUser(['user_mail']);
+
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    if (version_compare(\Drupal::VERSION, '10.1.0', '>=')) {
+      $this->assertSession()->fieldNotExists('mail');
+    }
+    else {
+      $this->assertSession()->fieldDisabled('mail');
+    }
+    $this->assertSession()->elementNotExists('css', '.messages');
+    $this->assertSession()->pageTextNotContains('has been protected');
   }
 
   /**
@@ -56,6 +103,24 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
     $this->drupalGet('user/' . $protected_account->id() . '/edit');
     $this->assertSession()->fieldNotExists('pass[pass1]');
     $this->assertSession()->fieldNotExists('pass[pass2]');
+    $this->assertSession()->pageTextContains($protected_account->getAccountName() . ' has been protected from the following editing operations: Password');
+  }
+
+  /**
+   * Tests password protection without message.
+   */
+  public function testPassProtectionWithoutMessage() {
+    \Drupal::configFactory()->getEditable('userprotect.settings')
+      ->set('display_applied_protections_message', FALSE)
+      ->save();
+
+    $protected_account = $this->createProtectedUser(['user_pass']);
+
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    $this->assertSession()->fieldNotExists('pass[pass1]');
+    $this->assertSession()->fieldNotExists('pass[pass2]');
+    $this->assertSession()->elementNotExists('css', '.messages');
+    $this->assertSession()->pageTextNotContains('has been protected');
   }
 
   /**
@@ -66,6 +131,23 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
 
     $this->drupalGet('user/' . $protected_account->id() . '/edit');
     $this->assertSession()->fieldNotExists('status');
+    $this->assertSession()->pageTextContains($protected_account->getAccountName() . ' has been protected from the following editing operations: Status');
+  }
+
+  /**
+   * Tests status protection without message.
+   */
+  public function testStatusProtectionWithoutMessage() {
+    \Drupal::configFactory()->getEditable('userprotect.settings')
+      ->set('display_applied_protections_message', FALSE)
+      ->save();
+
+    $protected_account = $this->createProtectedUser(['user_status']);
+
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    $this->assertSession()->fieldNotExists('status');
+    $this->assertSession()->elementNotExists('css', '.messages');
+    $this->assertSession()->pageTextNotContains('has been protected');
   }
 
   /**
@@ -89,7 +171,44 @@ class UserProtectionTest extends UserProtectBrowserTestBase {
     $this->assertFalse($protected_account->hasRole($rid2));
 
     // Ensure a checkbox for the second role is not available.
-    $this->assertSession()->fieldNotExists(sprintf('roles[%s]', $rid2));
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    $this->assertSession()->fieldDisabled('roles[authenticated]');
+    $this->assertSession()->fieldDisabled(sprintf('roles[%s]', $rid1));
+    $this->assertSession()->fieldDisabled(sprintf('roles[%s]', $rid2));
+    $this->assertSession()->pageTextContains($protected_account->getAccountName() . ' has been protected from the following editing operations: Roles');
+  }
+
+  /**
+   * Tests roles protection without message.
+   */
+  public function testRolesProtectionWithoutMessage() {
+    \Drupal::configFactory()->getEditable('userprotect.settings')
+      ->set('display_applied_protections_message', FALSE)
+      ->save();
+
+    $protected_account = $this->createProtectedUser(['user_roles']);
+
+    // Add a role to the protected account.
+    $rid1 = $this->drupalCreateRole([]);
+    $protected_account->addRole($rid1);
+    $protected_account->save();
+
+    // Add another role. We try to add this role to the user form later.
+    $rid2 = $this->drupalCreateRole([]);
+
+    // Reload the user and check its roles.
+    $protected_account = $this->reloadEntity($protected_account);
+    // Assert the protected account's roles.
+    $this->assertTrue($protected_account->hasRole($rid1));
+    $this->assertFalse($protected_account->hasRole($rid2));
+
+    // Ensure a checkbox for the second role is not available.
+    $this->drupalGet('user/' . $protected_account->id() . '/edit');
+    $this->assertSession()->fieldDisabled('roles[authenticated]');
+    $this->assertSession()->fieldDisabled(sprintf('roles[%s]', $rid1));
+    $this->assertSession()->fieldDisabled(sprintf('roles[%s]', $rid2));
+    $this->assertSession()->elementNotExists('css', '.messages');
+    $this->assertSession()->pageTextNotContains('has been protected');
   }
 
 }

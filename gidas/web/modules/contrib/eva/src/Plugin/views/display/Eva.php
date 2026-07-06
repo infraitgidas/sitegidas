@@ -69,7 +69,7 @@ class Eva extends DisplayPluginBase {
    * {@inheritdoc}
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entityTypeManager, EntityTypeBundleInfoInterface $bundleInfo, CurrentPathStack $currentPathStack, ViewDisplays $evaViewDisplays) {
-    parent::__construct([], $plugin_id, $plugin_definition);
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->entityTypeManager = $entityTypeManager;
     $this->bundleInfo = $bundleInfo;
     $this->currentPathStack = $currentPathStack;
@@ -191,7 +191,7 @@ class Eva extends DisplayPluginBase {
           '#required' => TRUE,
           '#validated' => TRUE,
           '#title' => $this->t('Attach this display to the following entity type'),
-          '#options' => $entity_names,
+          '#options' => $entity_names ?? [],
           '#default_value' => $this->getOption('entity_type'),
         ];
         break;
@@ -248,11 +248,9 @@ class Eva extends DisplayPluginBase {
         if (\Drupal::service('module_handler')->moduleExists('token')) {
           $token_types = [$entity_type => $entity_type];
           $token_mapper = \Drupal::service('token.entity_mapper');
-          if (!empty($token_types)) {
-            $token_types = array_map(function ($type) use ($token_mapper) {
-              return $token_mapper->getTokenTypeForEntityType($type);
-            }, (array) $token_types);
-          }
+          $token_types = array_map(function ($type) use ($token_mapper) {
+            return $token_mapper->getTokenTypeForEntityType($type);
+          }, (array) $token_types);
           $form['token']['browser'] = [
             '#theme' => 'token_tree_link',
             '#token_types' => $token_types,
@@ -333,15 +331,8 @@ class Eva extends DisplayPluginBase {
         $this->setOption('entity_type', $new_entity);
 
         if ($new_entity != $old_entity) {
-          // Each entity has its own list of bundles and view modes. If there's
-          // only one on the new type, we can select it automatically. Otherwise
-          // we need to wipe the options and start over.
-          $new_bundles_keys = $this->bundleInfo->getBundleInfo($new_entity);
-          $new_bundles = [];
-          if (count($new_bundles_keys) == 1) {
-            $new_bundles[] = $new_bundles_keys[0];
-          }
-          $this->setOption('bundles', $new_bundles);
+          // Reset bundle options.
+          $this->setOption('bundles', []);
         }
         break;
 
@@ -377,8 +368,8 @@ class Eva extends DisplayPluginBase {
       /** @var \Drupal\Core\Entity\EntityInterface $current_entity */
       $current_entity = $this->view->current_entity;
 
-      /** @var \Drupal\Core\Url $uri */
       if ($current_entity->hasLinkTemplate('canonical')) {
+        /** @var \Drupal\Core\Url $uri */
         $uri = $current_entity->toUrl('canonical');
         if ($uri) {
           $uri->setAbsolute(TRUE);

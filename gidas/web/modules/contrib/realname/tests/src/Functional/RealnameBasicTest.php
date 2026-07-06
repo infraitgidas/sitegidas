@@ -35,7 +35,7 @@ class RealnameBasicTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $permissions = [
@@ -56,7 +56,7 @@ class RealnameBasicTest extends BrowserTestBase {
   /**
    * Test realname configuration.
    */
-  public function testRealnameConfiguration() {
+  public function testRealnameConfiguration(): void {
     $assert_session = $this->assertSession();
 
     // Check if Configure link is available on 'Modules' page.
@@ -93,7 +93,7 @@ class RealnameBasicTest extends BrowserTestBase {
   /**
    * Test realname alter functions.
    */
-  public function testRealnameUsernameAlter() {
+  public function testRealnameUsernameAlter(): void {
     $assert_session = $this->assertSession();
 
     // Add a test string and see if core username has been replaced by realname.
@@ -120,7 +120,7 @@ class RealnameBasicTest extends BrowserTestBase {
   /**
    * Test realname display configuration.
    */
-  public function testRealnameManageDisplay() {
+  public function testRealnameManageDisplay(): void {
     $assert_session = $this->assertSession();
 
     $edit['realname_pattern'] = '[user:account-name]';
@@ -161,7 +161,7 @@ class RealnameBasicTest extends BrowserTestBase {
   /**
    * Test realname user update.
    */
-  public function testRealnameUserUpdate() {
+  public function testRealnameUserUpdate(): void {
     $edit['realname_pattern'] = '[user:account-name]';
     $this->drupalGet('admin/config/people/realname');
     $this->submitForm($edit, 'Save configuration');

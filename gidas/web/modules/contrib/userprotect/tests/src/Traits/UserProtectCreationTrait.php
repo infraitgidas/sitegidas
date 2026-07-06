@@ -2,6 +2,7 @@
 
 namespace Drupal\Tests\userprotect\Traits;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\userprotect\Entity\ProtectionRule;
 use Drupal\userprotect\Entity\ProtectionRuleInterface;
 
@@ -117,6 +118,22 @@ trait UserProtectCreationTrait {
     $protection_rule = ProtectionRule::create($values);
     $this->assertInstanceOf(ProtectionRuleInterface::class, $protection_rule);
     return $protection_rule;
+  }
+
+  /**
+   * Reloads an entity where null is an allowed return value.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to reload.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface|null
+   *   The reloaded entity or null, if the entity could not be found.
+   */
+  protected function reloadEntityAllowNull(EntityInterface $entity): ?EntityInterface {
+    /** @var \Drupal\Core\Entity\EntityStorageInterface $storage */
+    $storage = $this->container->get('entity_type.manager')->getStorage($entity->getEntityTypeId());
+    $storage->resetCache([$entity->id()]);
+    return $storage->load($entity->id());
   }
 
 }

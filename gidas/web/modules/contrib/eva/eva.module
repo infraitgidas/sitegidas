@@ -5,12 +5,28 @@
  * Module implementing EVA extra field and views display.
  */
 
+use Drupal\views\ViewEntityInterface;
 use Drupal\views\Views;
 use Drupal\views\Element\View;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+ /**
+ * Implements hook_help().
+ */
+function eva_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the eva module.
+    case 'help.page.eva':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('"Eva" is short for "Entity Views Attachment;" it provides a Views display plugin that allows the output of a View to be attached to the content of any Drupal entity.') . '</p>';
+      return $output;
+  }
+}
 
 /**
  * Implements hook_entity_extra_field_info().
@@ -60,9 +76,6 @@ function eva_entity_view(array &$build, EntityInterface $entity, EntityViewDispl
         $view->setDisplay($info['display']);
         if ((empty($info['bundles']) || in_array($display->getTargetBundle(), $info['bundles'])) && $view->access($info['display'])) {
 
-          // Save the entity for path calculation.
-          $view->current_entity = $entity;
-
           // Gather info about the attached-to entity.
           $entity_type = $view->display_handler->getOption('entity_type');
           $arg_mode = $view->display_handler->getOption('argument_mode');
@@ -99,6 +112,7 @@ function eva_entity_view(array &$build, EntityInterface $entity, EntityViewDispl
           // Now that arguments are set, build the exposed form.
           if ($info['uses exposed'] && $display->getComponent($longname . '_form')) {
             $view->initHandlers();
+            /** @var \Drupal\views\Plugin\views\exposed_form\ExposedFormPluginInterface $exposed_form */
             $exposed_form = $view->display_handler->getPlugin('exposed_form');
             $build[$longname . '_form'] = $exposed_form->renderExposedForm(TRUE);
           }
@@ -153,11 +167,11 @@ function eva_modules_disabled($modules) {
  * Address https://www.drupal.org/node/2922112: if Eva displays are removed,
  * remove the module dependency from the View.
  */
-function eva_view_presave(EntityInterface $view) {
+function eva_view_presave(ViewEntityInterface $view) {
   $dependencies = $view->get('dependencies');
-  if (in_array('eva', $dependencies['module'])) {
+  if (in_array('eva', $dependencies['module'] ?? [])) {
     $eva_count = 0;
-    foreach ($view->get('display') as $display_id => $display) {
+    foreach ($view->get('display') as $display) {
       // Is there a display that's still using Eva?
       if ($display['display_plugin'] == 'entity_view') {
         $eva_count += 1;

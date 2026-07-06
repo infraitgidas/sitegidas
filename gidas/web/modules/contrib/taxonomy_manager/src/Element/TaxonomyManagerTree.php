@@ -2,10 +2,10 @@
 
 namespace Drupal\taxonomy_manager\Element;
 
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Entity\Query\QueryException;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
-use Drupal\Component\Utility\Html;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -37,7 +37,7 @@ class TaxonomyManagerTree extends FormElement {
 
     if (!empty($element['#vocabulary'])) {
       $taxonomy_vocabulary = \Drupal::entityTypeManager()->getStorage('taxonomy_vocabulary')->load($element['#vocabulary']);
-      $pager_size = isset($element['#pager_size']) ? $element['#pager_size'] : -1;
+      $pager_size = $element['#pager_size'] ?? -1;
       $terms = TaxonomyManagerTree::loadTerms($taxonomy_vocabulary, 0, $pager_size);
       $list = TaxonomyManagerTree::getNestedListJsonArray($terms);
 
@@ -88,6 +88,7 @@ class TaxonomyManagerTree extends FormElement {
   public static function loadTerms($vocabulary, $parent = 0, $pager_size = -1) {
     try {
       $query = \Drupal::entityQuery('taxonomy_term')
+        ->accessCheck()
         ->condition('vid', $vocabulary->id())
         ->condition('parent', $parent)
         ->sort('weight')

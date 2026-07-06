@@ -36,7 +36,7 @@ interface ProtectionRuleInterface extends ConfigEntityInterface {
   /**
    * Gets the protected entity.
    *
-   * @return EntityInterface
+   * @return \Drupal\Core\Entity\EntityInterface|null
    *   The loaded entity, if found.
    *   NULL otherwise.
    */

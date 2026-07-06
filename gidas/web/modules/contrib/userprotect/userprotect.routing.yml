@@ -38,3 +38,11 @@ entity.userprotect_rule.delete_form:
     _title: 'Delete protection rule'
   requirements:
     _permission: 'userprotect.administer'
+
+userprotect.settings:
+  path: '/admin/config/people/userprotect/settings'
+  defaults:
+    _form: '\Drupal\userprotect\Form\UserProtectSettingsForm'
+    _title: 'User protect settings'
+  requirements:
+    _permission: 'userprotect.administer'

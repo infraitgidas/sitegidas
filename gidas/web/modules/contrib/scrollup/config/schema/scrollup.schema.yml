@@ -1,0 +1,28 @@
+scrollup.settings:
+  type: config_object
+  label: 'Scrollup settings'
+  mapping:
+    scrollup_position:
+      type: string
+      label: 'Scrollup positon'
+    scrollup_button_bg_color:
+      type: string
+      label: 'Scrollup button bg color'
+    scrollup_button_hover_bg_color:
+      type: string
+      label: 'Scrollup button hover bg color'
+    scrollup_title:
+      type: string
+      label: 'Scrollup title'
+    scrollup_window_position:
+      type: string
+      label: 'Scrollup window positon'
+    scrollup_speed:
+      type: string
+      label: 'Scrollup speed'
+    scrollup_themename:
+      type: sequence
+      label: 'Scrollup themename'
+      sequence:
+        type: string
+        label: 'Theme name'

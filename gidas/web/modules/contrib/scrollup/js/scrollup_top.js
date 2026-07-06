@@ -1,49 +1,67 @@
-(function ($, Drupal, drupalSettings) {
+/**
+ * @file
+ * ScrollUp javascript file.
+ */
+
+(function (Drupal, drupalSettings, once) {
 
   Drupal.behaviors.scrollup = {
 
-    attach: function (context, settings) {      
-      $(document).ready(function(){
-		  if(drupalSettings.scrollup_title == '' || drupalSettings.scrollup_title == null){
-			var scroll_title = '';
-		  } else {
-			var scroll_title = drupalSettings.scrollup_title;
-		  }
-		  
-          $('body').append('<a href="#" title="scroll_title" class="scrollup">Scroll<div class="scroll-title">'+scroll_title+'</div></a>');
-          var position = drupalSettings.scrollup_position;
-          var button_bg_color = drupalSettings.scrollup_button_bg_color;
-          var hover_button_bg_color = drupalSettings.scrollup_button_hover_bg_color;
-		  var scroll_window_position = parseInt(drupalSettings.scrollup_window_position);
-		  var scroll_speed = parseInt(drupalSettings.scrollup_speed);
-		  
-          if (position == 1) {
-            $('.scrollup').css({"right":"100px","background-color":button_bg_color});
-          } else {
-            $('.scrollup').css({"left":"100px","background-color":button_bg_color});
-          }
-          
-          $(".scrollup").hover(function(){
-            $(this).css("background-color", hover_button_bg_color);
-          }, function(){
-            $(this).css("background-color", button_bg_color);
-          });
-          
-          $(window).scroll(function () {
-            if ($(this).scrollTop() > scroll_window_position) {
-              $('.scrollup').fadeIn();
-            } else {
-              $('.scrollup').fadeOut();
-            }
-          });
-          
-          $(".scrollup").click(function(){
-            $("html, body").animate({
-              scrollTop: 0
-            }, scroll_speed);
-            return false;
-          });
+    attach: function () {
+      let linkTitle = 'Scroll to the top of the page.';
+      let linkContent = '';
+      if (drupalSettings.scrollup_title !== '' && drupalSettings.scrollup_title !== null) {
+        linkTitle = drupalSettings.scrollup_title;
+        linkContent = drupalSettings.scrollup_title;
+      }
+
+      const bodyContainer = once('scrollup', document.querySelector('body'));
+
+      if (bodyContainer.length === 0) {
+        return;
+      }
+
+      const [body] = bodyContainer;
+      body.insertAdjacentHTML("beforeend", `<a href="#" title="${linkTitle}" class="scrollup">Scroll<span class="scroll-title">${linkContent}</span></a>`);
+
+      const scrollUpButton = document.querySelector('.scrollup');
+      const position = drupalSettings.scrollup_position;
+      const button_bg_color = drupalSettings.scrollup_button_bg_color;
+      const hover_button_bg_color = drupalSettings.scrollup_button_hover_bg_color;
+      const scroll_window_position = parseInt(drupalSettings.scrollup_window_position);
+      const scroll_speed = parseInt(drupalSettings.scrollup_speed);
+
+      if (position == 1) {
+        document.dir === 'ltr' ? scrollUpButton.style.right = '0px' : scrollUpButton.style.left = '0px';
+      }
+      else {
+        scrollUpButton.style.left = '0px';
+      }
+      scrollUpButton.style.backgroundColor = `${button_bg_color}`;
+
+      scrollUpButton.addEventListener("mouseover", function (event) {
+        event.preventDefault();
+        scrollUpButton.style.backgroundColor = `${hover_button_bg_color}`;
+      });
+
+      scrollUpButton.addEventListener("mouseleave", function (event) {
+        event.preventDefault();
+        scrollUpButton.style.backgroundColor = `${button_bg_color}`;
+      });
+
+      window.addEventListener('scroll', function (event) {
+        event.preventDefault();
+        scrollUpButton.style.display = (window.pageYOffset > scroll_window_position) ? 'block' : 'none';
+      });
+
+      scrollUpButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.querySelectorAll('html, body').forEach(node => node.scrollTo({
+          top: 0,
+          behavior: "smooth",
+          duration: scroll_speed
+        }))
       });
     }
   };
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, drupalSettings, once);

@@ -1,9 +1,11 @@
 scrollup:
-  version: 1.x
+  version: 3.x
   css:
     theme:
       css/scrollup_top.css: {}
   js:
     js/scrollup_top.js: {}
   dependencies:
-    - core/jquery
+    - core/drupalSettings
+    - core/drupal
+    - core/once

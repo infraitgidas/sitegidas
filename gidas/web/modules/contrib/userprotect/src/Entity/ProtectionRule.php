@@ -5,12 +5,14 @@ namespace Drupal\userprotect\Entity;
 use Drupal\Component\Plugin\PluginInspectionInterface;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
 use Drupal\user\UserInterface;
-use Drupal\userprotect\UserProtect;
 use Drupal\userprotect\Plugin\UserProtection\UserProtectionPluginCollection;
+use Drupal\userprotect\UserProtect;
 
 /**
  * Defines the Protection rule entity.
@@ -286,7 +288,9 @@ class ProtectionRule extends ConfigEntityBase implements ProtectionRuleInterface
     foreach ($entities as $entity) {
       $permission = $entity->getPermissionName();
       if ($permission) {
-        $roles = array_keys(user_role_names(FALSE, $permission));
+        // Find out which roles may bypass the given protection rule, by
+        // filtering the roles on the bypass permission name for this rule.
+        $roles = array_keys(array_filter(Role::loadMultiple(), fn(RoleInterface $role) => $role->hasPermission($permission)));
         $entity->setBypassRoles($roles);
       }
     }
@@ -302,7 +306,7 @@ class ProtectionRule extends ConfigEntityBase implements ProtectionRuleInterface
     $roles = $this->getBypassRoles();
     $permission = $this->getPermissionName();
     if ($roles && $permission) {
-      foreach (user_roles() as $rid => $name) {
+      foreach (Role::loadMultiple() as $rid => $name) {
         $enabled = in_array($rid, $roles, TRUE);
         user_role_change_permissions($rid, [$permission => $enabled]);
       }
@@ -344,9 +348,9 @@ class ProtectionRule extends ConfigEntityBase implements ProtectionRuleInterface
    * {@inheritdoc}
    */
   public function isProtected(UserInterface $user, $op, AccountInterface $account) {
-    // First check if this protection rule is applyable to the given user.
+    // First check if this protection rule is applicable to the given user.
     if (!$this->appliesTo($user)) {
-      // Not applyable. The operation is not protected by this rule.
+      // Not applicable. The operation is not protected by this rule.
       return FALSE;
     }
 

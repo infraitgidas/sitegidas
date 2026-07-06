@@ -105,6 +105,7 @@ abstract class UserProtectionBase extends PluginBase implements UserProtectionIn
     if ($op == $this->getPluginId()) {
       return TRUE;
     }
+    return FALSE;
   }
 
   /**

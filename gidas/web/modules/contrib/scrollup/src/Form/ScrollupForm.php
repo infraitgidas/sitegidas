@@ -2,13 +2,41 @@
 
 namespace Drupal\scrollup\Form;
 
+use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure animated scroll to top settings for this site.
  */
 class ScrollupForm extends ConfigFormBase {
+
+  /**
+   * The theme handler.
+   *
+   * @var \Drupal\Core\Extension\ThemeHandlerInterface
+   */
+  protected $themeHandler;
+
+  /**
+   * Constructs a ScrollupForm object.
+   *
+   * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
+   *   The theme handler.
+   */
+  public function __construct(ThemeHandlerInterface $theme_handler) {
+    $this->themeHandler = $theme_handler;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('theme_handler')
+    );
+  }
 
   /**
    * Implements getEditableConfigNames().
@@ -41,7 +69,7 @@ class ScrollupForm extends ConfigFormBase {
       '#title' => $this->t('Themes Name'),
       '#description' => $this->t('Scroll up button add multiple themes.'),
       '#type' => 'select',
-      '#multiple' => true,
+      '#multiple' => TRUE,
       '#options' => $this->getThemeName(),
       '#default_value' => $config->get('scrollup_themename'),
     ];
@@ -50,7 +78,7 @@ class ScrollupForm extends ConfigFormBase {
       '#type' => 'fieldset',
     ];
     $form['scrolling_fieldset']['scrollup_title'] = [
-      '#title' => $this->t( 'Scrollup Button Title' ),
+      '#title' => $this->t('Scrollup Button Title'),
       '#description' => $this->t('scrollup button title'),
       '#type' => 'textfield',
       '#default_value' => $config->get('scrollup_title'),
@@ -59,14 +87,14 @@ class ScrollupForm extends ConfigFormBase {
       '#title' => $this->t('Window scrollup fadeIn and fadeout position'),
       '#description' => $this->t('Enter the value of fadeIn & fadeout window scrollup in ms.'),
       '#type' => 'number',
-      '#required' => true,
+      '#required' => TRUE,
       '#default_value' => $config->get('scrollup_window_position'),
     ];
     $form['scrolling_fieldset']['scrollup_speed'] = [
       '#title' => $this->t('Scrollup speed'),
       '#description' => $this->t('Enter the value of Scrollup speed in ms.'),
       '#type' => 'number',
-      '#required' => true,
+      '#required' => TRUE,
       '#default_value' => $config->get('scrollup_speed'),
     ];
     $form['button_fieldset'] = [
@@ -102,11 +130,10 @@ class ScrollupForm extends ConfigFormBase {
   /**
    * Implement getThemeName().
    */
-  public function getThemeName(){
-    $theme_handler = \Drupal::service('theme_handler');
-    $themes = $theme_handler->listInfo();
-    foreach($themes as $key=> $val){
-      $theme_arr[$key]= $val->info['name'];
+  public function getThemeName() {
+    $themes = $this->themeHandler->listInfo();
+    foreach ($themes as $key => $val) {
+      $theme_arr[$key] = $val->info['name'];
     }
     return $theme_arr;
   }
@@ -117,7 +144,7 @@ class ScrollupForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $scrollup_position = $form_state->getValues('scrollup_position');
     $scrollup_button_bg_color = $form_state->getValues('scrollup_button_bg_color');
-    $scrollup_button_hover_bg_color = $form_state->getValues('scrollup_button_hover_bg_color');	
+    $scrollup_button_hover_bg_color = $form_state->getValues('scrollup_button_hover_bg_color');
     $scrollup_title = $form_state->getValues('scrollup_title');
     $scrollup_window_position = $form_state->getValues('scrollup_window_position');
     $scrollup_speed = $form_state->getValues('scrollup_speed');

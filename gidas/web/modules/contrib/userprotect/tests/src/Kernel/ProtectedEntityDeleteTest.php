@@ -31,7 +31,7 @@ class ProtectedEntityDeleteTest extends UserProtectKernelTestBase {
     $account->delete();
 
     // Assert that the rule no longer exists.
-    $protection_rule = $this->reloadEntity($protection_rule);
+    $protection_rule = $this->reloadEntityAllowNull($protection_rule);
     $this->assertNull($protection_rule, 'The protection rule was deleted.');
   }
 
@@ -58,7 +58,7 @@ class ProtectedEntityDeleteTest extends UserProtectKernelTestBase {
     $role->delete();
 
     // Assert that the rule no longer exists.
-    $protection_rule = $this->reloadEntity($protection_rule);
+    $protection_rule = $this->reloadEntityAllowNull($protection_rule);
     $this->assertNull($protection_rule, 'The protection rule was deleted.');
   }
 

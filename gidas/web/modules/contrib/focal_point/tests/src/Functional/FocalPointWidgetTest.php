@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\Tests\focal_point\Functional;
 
+use Drupal\Component\Utility\DeprecationHelper;
 use Drupal\file\Entity\File;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\image\Kernel\ImageFieldCreationTrait;
+use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\TestFileCreationTrait;
 
 /**
@@ -14,6 +18,7 @@ use Drupal\Tests\TestFileCreationTrait;
  */
 class FocalPointWidgetTest extends BrowserTestBase {
 
+  use ContentTypeCreationTrait;
   use ImageFieldCreationTrait;
   use TestFileCreationTrait;
 
@@ -30,18 +35,11 @@ class FocalPointWidgetTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     // Create an article content type that we will use for testing.
-    $type = $this->container->get('entity_type.manager')->getStorage('node_type')
-      ->create([
-        'type' => 'article',
-        'name' => 'Article',
-      ]);
-    $type->save();
-    $this->container->get('router.builder')->rebuild();
-
+    $this->drupalCreateContentType(['type' => 'article', 'name' => 'Article']);
   }
 
   /**
@@ -51,27 +49,29 @@ class FocalPointWidgetTest extends BrowserTestBase {
 
     $field_name = strtolower($this->randomMachineName());
 
-    $this->createImageField($field_name, 'article', [], [
-      'file_extensions' => 'png jpg gif',
-    ], [], [
-      'image_style' => 'large',
-      'image_link' => '',
-    ]);
+    class_exists(DeprecationHelper::class) ? DeprecationHelper::backwardsCompatibleCall(
+      \Drupal::VERSION,
+      "10.3",
+      fn() => $this->createImage($field_name),
+      fn() => $this->createImage($field_name, TRUE)
+    ) : $this->createImage($field_name, TRUE);
 
     // Find images that match our field settings.
     $images = $this->getTestFiles('image');
+    /** @var \Drupal\file\Entity\File $image */
+    $image = $images[0];
 
     // Create a File entity for the initial image.
     $file = File::create([
-      'uri' => $images[0]->uri,
+      'uri' => $image->uri,
       'uid' => 0,
-      'status' => FILE_STATUS_PERMANENT,
     ]);
+    $file->setPermanent();
     $file->save();
 
     // Use the first valid image to create a new Node.
     $image_factory = $this->container->get('image.factory');
-    $image = $image_factory->get($images[0]->uri);
+    $image = $image_factory->get($image->uri);
 
     /** @var \Drupal\focal_point\FocalPointManagerInterface $focalPointManager */
     $focalPointManager = \Drupal::service('focal_point.manager');
@@ -95,6 +95,33 @@ class FocalPointWidgetTest extends BrowserTestBase {
     $this->assertEquals(1, $crop->get('y')->value);
     $this->assertEquals(0, $crop->get('width')->value);
     $this->assertEquals(0, $crop->get('height')->value);
+  }
+
+  /**
+   * Function to create image field.
+   *
+   * @param string $field_name
+   *   The field name to create.
+   * @param bool $deprecated
+   *   Decides if deprecated method call.
+   */
+  protected function createImage(string $field_name, bool $deprecated = FALSE): void {
+    if ($deprecated) {
+      $this->createImageField($field_name, 'article', [], [
+        'file_extensions' => 'png jpg gif',
+      ], [], [
+        'image_style' => 'large',
+        'image_link' => '',
+      ]);
+    }
+    else {
+      $this->createImageField($field_name, 'node', 'article', [
+        'file_extensions' => 'png jpg gif',
+      ], [], [
+        'image_style' => 'large',
+        'image_link' => '',
+      ]);
+    }
   }
 
 }

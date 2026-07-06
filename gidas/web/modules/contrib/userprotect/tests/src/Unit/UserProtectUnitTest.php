@@ -2,8 +2,8 @@
 
 namespace Drupal\Tests\userprotect\Unit;
 
-use Drupal\userprotect\UserProtect;
 use Drupal\Tests\UnitTestCase;
+use Drupal\userprotect\UserProtect;
 use Symfony\Component\DependencyInjection\Container;
 
 /**

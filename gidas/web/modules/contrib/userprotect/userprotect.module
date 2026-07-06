@@ -29,10 +29,16 @@ function userprotect_rule_load($name) {
  * Implements hook_ENTITY_TYPE_access() for entity type "user".
  */
 function userprotect_user_access(UserInterface $entity, $op, AccountInterface $account) {
+  // User Protect doesn't limit view access in any way, so bail out early to
+  // save time.
+  if (in_array($op, ['view', 'view label'])) {
+    return AccessResult::neutral();
+  }
+
   // Check if the account has the permission "userprotect.bypass_all".
   // If so, all protections rules should be ignored.
   if (!$account->hasPermission('userprotect.bypass_all')) {
-    // Users editing their own accounts have the permissions for e-mail
+    // Users editing their own accounts have the permissions for email
     // and password determined by the role-based setting in the userprotect
     // section at admin/config/people/permissions. This is done for consistency
     // with the way core handles the self-editing of usernames.
@@ -112,7 +118,7 @@ function userprotect_user_access(UserInterface $entity, $op, AccountInterface $a
  *
  * @see userprotect_user_access()
  */
-function userprotect_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, FieldItemList $items = NULL) {
+function userprotect_entity_field_access($operation, FieldDefinitionInterface $field_definition, AccountInterface $account, ?FieldItemList $items = NULL) {
   if (is_null($items)) {
     // Sometimes no field item list is passed. In this case, there is nothing
     // for userprotect to check.
@@ -233,7 +239,8 @@ function userprotect_form_user_form_alter(&$form, &$form_state) {
 
   // Display a message about the applied protections if there were protections
   // applied and if the current user is an admin user.
-  if (count($applied) && $account->hasPermission('administer users')) {
+  $display_message = \Drupal::config('userprotect.settings')->get('display_applied_protections_message');
+  if ($display_message && count($applied) && $account->hasPermission('administer users')) {
     $message = t('%user has been protected from the following editing operations: @operations', [
       '%user' => $entity->getAccountName(),
       '@operations' => implode(', ', $applied),

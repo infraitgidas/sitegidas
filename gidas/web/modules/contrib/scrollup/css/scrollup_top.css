@@ -1,24 +1,25 @@
 .scrollup {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 100px;
   position: fixed;
   bottom: 50px;
   text-indent: -9999px;
-  background: url('../images/arrow.png') center no-repeat;
-  border-radius: 50%;
+  background: url(../images/arrow.png) 50% 20% no-repeat;
   display: none;
 }
 
 .scroll-title {
   text-indent: 0;
-  min-width: 100px;
   position: relative;
-  top: 31px;
+  top: 15px;
+  text-align: center;
+  color:#fff;
 }
 
 a.scrollup {
   border-bottom-style: none;
   border-bottom: 0;
+  z-index: 10;
 }
 
 .scrollup:hover {

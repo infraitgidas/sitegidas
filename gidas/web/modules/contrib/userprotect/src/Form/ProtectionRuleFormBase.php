@@ -3,10 +3,12 @@
 namespace Drupal\userprotect\Form;
 
 use Drupal\Core\Entity\EntityForm;
-use Drupal\user\UserStorageInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+use Drupal\user\UserStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -45,11 +47,7 @@ abstract class ProtectionRuleFormBase extends EntityForm {
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
    */
-  public function __construct(
-    EntityStorageInterface $protection_rule_storage,
-    UserStorageInterface $user_storage,
-    MessengerInterface $messenger
-  ) {
+  public function __construct(EntityStorageInterface $protection_rule_storage, UserStorageInterface $user_storage, MessengerInterface $messenger) {
     $this->protectionRuleStorage = $protection_rule_storage;
     $this->userStorage = $user_storage;
     $this->messenger = $messenger;
@@ -71,8 +69,10 @@ abstract class ProtectionRuleFormBase extends EntityForm {
    */
   protected function getBypassMessage($permission, $permission_label) {
     $message = $this->t('Users with the permission "%permission".', ['%permission' => $permission_label]);
-    $roles = user_role_names(FALSE, $permission);
-    if (count($roles)) {
+    $roles = $this->getRoleNames([
+      'permission' => $permission,
+    ]);
+    if (count($roles) > 0) {
       $message .= '<br /><div class="description">' . $this->t('Currently the following roles have this permission:  %roles.', ['%roles' => implode(', ', $roles)]) . '</div>';
     }
     else {
@@ -171,7 +171,11 @@ abstract class ProtectionRuleFormBase extends EntityForm {
         break;
 
       case 'user_role':
-        $entities = array_map('Drupal\Component\Utility\Html::escape', user_role_names(TRUE));
+        // Compose a list of roles that can be protected, but exclude the
+        // anonymous role from this list.
+        $entities = array_map('Drupal\Component\Utility\Html::escape', $this->getRoleNames([
+          'anonymous' => FALSE,
+        ]));
         $form['entity_id'] = [
           '#type' => 'select',
           '#title' => $this->t('Role'),
@@ -191,6 +195,7 @@ abstract class ProtectionRuleFormBase extends EntityForm {
             '#type' => 'item',
             '#markup' => $plugin->label(),
             '#description' => $plugin->description(),
+            '#description_display' => 'after',
           ],
         ],
       ];
@@ -205,7 +210,7 @@ abstract class ProtectionRuleFormBase extends EntityForm {
       '#default_value' => $enabled_protections,
     ];
 
-    $roles = array_map('Drupal\Component\Utility\Html::escape', user_role_names());
+    $roles = array_map('Drupal\Component\Utility\Html::escape', $this->getRoleNames());
     $form['bypass_roles'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Bypass for roles'),
@@ -251,8 +256,38 @@ abstract class ProtectionRuleFormBase extends EntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
-    $this->entity->save();
+    $result = $this->entity->save();
     $form_state->setRedirect('userprotect.rule_list');
+    return $result;
+  }
+
+  /**
+   * Returns a list of role names.
+   *
+   * @param array $options
+   *   (optional) An associative array with additional options. The following
+   *   keys can be used:
+   *   - permission: (string) filter role names by permission.
+   *   - anonymous: (bool) Whether or not to include the anonymous role.
+   *     Defaults to true.
+   *
+   * @return string[]
+   *   A list of role names.
+   */
+  protected function getRoleNames(array $options = []): array {
+    $options += [
+      'permission' => NULL,
+      'anonymous' => TRUE,
+    ];
+    $roles = Role::loadMultiple();
+    if (!$options['anonymous']) {
+      unset($roles[RoleInterface::ANONYMOUS_ID]);
+    }
+    if (isset($options['permission'])) {
+      $roles = array_filter($roles, fn(RoleInterface $role) => $role->hasPermission($options['permission']));
+    }
+
+    return array_map(fn(RoleInterface $role) => $role->label(), $roles);
   }
 
 }

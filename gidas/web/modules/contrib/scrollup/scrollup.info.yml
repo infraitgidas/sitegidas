@@ -1,13 +1,11 @@
 name: Scrollup
 description: 'Scroll Up to the page. Provide advanced configuration for administrator to manage behaviour of scrolling.'
 type: 'module'
-# version: '8.x-1.0'
-core: '8.x'
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9.4 || ^10.0 || ^11
 # project: 'scrollup'
-#datestamp: 
+configure: scrollup.form
 
-# Information added by Drupal.org packaging script on 2020-06-09
-version: '3.0.0'
+# Information added by Drupal.org packaging script on 2024-05-22
+version: '3.0.3'
 project: 'scrollup'
-datestamp: 1591684415
+datestamp: 1716351049

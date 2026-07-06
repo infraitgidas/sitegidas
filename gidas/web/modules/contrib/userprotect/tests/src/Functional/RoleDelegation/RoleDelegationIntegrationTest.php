@@ -2,7 +2,10 @@
 
 namespace Drupal\Tests\userprotect\Functional\RoleDelegation;
 
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
 use Drupal\userprotect\Entity\ProtectionRule;
 
 /**
@@ -17,7 +20,13 @@ class RoleDelegationIntegrationTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['userprotect', 'user', 'role_delegation'];
+  protected static $modules = [
+    'block',
+    'user',
+    'userprotect',
+    'userprotect_test',
+    'role_delegation',
+  ];
 
   /**
    * {@inheritdoc}
@@ -62,7 +71,7 @@ class RoleDelegationIntegrationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  public function setUp() {
+  public function setUp(): void {
     parent::setUp();
 
     $admin_role = $this->createAdminRole();
@@ -96,6 +105,8 @@ class RoleDelegationIntegrationTest extends BrowserTestBase {
       'protectedEntityTypeId' => 'user_role',
       'protectedEntityId' => $admin_role,
     ])->save();
+
+    $this->placeBlock('local_tasks_block');
   }
 
   /**
@@ -167,9 +178,19 @@ class RoleDelegationIntegrationTest extends BrowserTestBase {
    * Test that user protect rules are also enabled on /user/%user/roles.
    */
   public function testRolesPage() {
-    // Ensure that an anonymous user cannot access teh user protect settings
+    // Since Role Delegation 8.x-1.3, users with the permission
+    // "administer users" cannot access the roles page.
+    $this->getFirstRole($this->roleDelegatedAdminUser)
+      ->revokePermission('administer users')
+      ->save();
+    $this->getFirstRole($this->regularRolesAdminUser)
+      ->revokePermission('administer users')
+      ->save();
+
+    // Ensure that an anonymous user cannot access the user protect settings
     // page.
     $this->drupalGet('admin/config/people/userprotect/manage/protect_admin_role');
+    $this->assertSession()->statusCodeEquals(403);
 
     // Login as the delegated admin user. This user has permission to assign
     // roles 1 and 2 to users.
@@ -194,16 +215,48 @@ class RoleDelegationIntegrationTest extends BrowserTestBase {
 
     $this->drupalGet(sprintf('/user/%s/roles', $this->adminUser->id()));
     $this->assertSession()->statusCodeEquals(403);
+  }
 
-    // Login as an user with the admin role. This user has all privileges.
-    $this->drupalLogin($this->adminUser);
+  /**
+   * Tests that local tasks without user parameter don't cause exceptions.
+   *
+   * This test verifies that when a route without a {user} parameter has a
+   * local task with base_route: entity.user.canonical, and the role_delegation
+   * module is enabled (which adds _userprotect_role_access_check to the
+   * role_delegation.edit_form route), rendering local tasks doesn't cause an
+   * exception about a missing $user argument.
+   */
+  public function testLocalTaskWithoutUserParameter() {
+    // Create a test user.
+    $test_user = $this->drupalCreateUser(['access content']);
 
-    // Ensure the admin user can access the roles edit page of all users.
-    $this->drupalGet(sprintf('/user/%s/roles', $this->roleDelegatedAdminUser->id()));
+    // Login as the test user.
+    $this->drupalLogin($test_user);
+
+    // Try to visit the test page without {user} parameter.
+    $this->drupalGet('/user/test-page');
+
+    // If we get here without an exception, the fix is working. We should get
+    // a 200 status code.
     $this->assertSession()->statusCodeEquals(200);
 
-    $this->drupalGet(sprintf('/user/%s/roles', $this->adminUser->id()));
-    $this->assertSession()->statusCodeEquals(200);
+    // Verify the page content is present.
+    $this->assertSession()->pageTextContains('Test page');
+  }
+
+  /**
+   * Returns the first role of the given user.
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The account for which to load the first role.
+   *
+   * @return \Drupal\user\RoleInterface
+   *   The role of the given user.
+   */
+  protected function getFirstRole(AccountInterface $account): RoleInterface {
+    $role_ids = $account->getRoles(TRUE);
+    $rid = current($role_ids);
+    return Role::load($rid);
   }
 
 }
