@@ -63,12 +63,12 @@
 
 | Componente | Versión | Propósito |
 |------------|---------|-----------|
-| **Drupal** | 9.4.8 | CMS Institucional |
-| **PHP** | 7.4 FPM | Procesamiento backend |
+| **Drupal** | 9.5.11 | CMS Institucional |
+| **PHP** | 8.1.34 | Procesamiento backend |
 | **Nginx** | 1.25 | Servidor web/proxy |
 | **MariaDB** | 10.5 | Base de datos |
 | **Composer** | 2.x | Gestión de dependencias |
-| **Drush** | 10.x | CLI de Drupal |
+| **Drush** | 11.6.0 | CLI de Drupal |
 
 ---
 
