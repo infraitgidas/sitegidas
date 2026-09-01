@@ -47,6 +47,16 @@ input {
     display: inline-block;
     margin: 0;
   }
+
+  // Webform issue: https://www.drupal.org/project/bootstrap5/issues/3306709
+  &.webform-multiple-add {
+    > .form-item {
+      > * {
+        display: inline-block;
+        width: unset;
+      }
+    }
+  }
 }
 
 td {
@@ -66,7 +76,10 @@ td {
     }
   }
 }
+
 .dropbutton-widget {
+  background-color: $white;
+
   @include border-radius($form-select-border-radius, 0);
   @include box-shadow($form-select-box-shadow);
 
@@ -77,40 +90,19 @@ td {
   }
 }
 
-fieldset {
-  &.form-item {
-    @extend .card;
-    > legend {
-      @extend .card-header;
-    }
-
-    > .fieldset-wrapper {
-      @extend .card-body;
+.webform-dropbutton {
+  .dropbutton-wrapper {
+    .dropbutton-widget {
+      background-color: $white;
     }
   }
 }
 
-.form-item-upload {
-  @extend .card;
-  margin-bottom: $spacer;
-
-  label {
-    @extend .card-header;
-  }
-
-  > div {
-    @extend .card-body;
-  }
-}
-
-.form-type-managed-file {
-  @extend .card;
-
-  > label {
-    @extend .card-header;
-  }
-
-  > div {
-    @extend .card-body;
+.system-file-system-settings {
+  .form-item {
+    label {
+      display: table;
+      font-weight: $font-weight-bold;
+    }
   }
 }

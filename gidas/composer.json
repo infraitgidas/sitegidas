@@ -19,7 +19,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/admin_toolbar": "^3.0",
         "drupal/block_class": "^4.0",
-        "drupal/bootstrap5": "^1.1",
+        "drupal/bootstrap5": "^4.0",
         "drupal/ckeditor_codemirror": "2.x-dev@dev",
         "drupal/colorbox": "^2.1",
         "drupal/console": "^1.9",
