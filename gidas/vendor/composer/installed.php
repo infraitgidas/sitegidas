@@ -587,17 +587,6 @@
             ),
             'dev_requirement' => false,
         ),
-        'drupal/flexslider' => array(
-            'pretty_version' => 'dev-2.x',
-            'version' => 'dev-2.x',
-            'reference' => '621ae10213ab790e5c003dd199f5300d74772342',
-            'type' => 'drupal-module',
-            'install_path' => __DIR__ . '/../../web/modules/contrib/flexslider',
-            'aliases' => array(
-                0 => '2.x-dev',
-            ),
-            'dev_requirement' => false,
-        ),
         'drupal/focal_point' => array(
             'pretty_version' => '2.1.2',
             'version' => '2.1.2.0',

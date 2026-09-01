@@ -32,7 +32,6 @@
         "drupal/field_label": "^1.0",
         "drupal/field_tokens": "^2.0@RC",
         "drupal/filefield_paths": "1.x-dev@dev",
-        "drupal/flexslider": "2.x-dev@dev",
         "drupal/focal_point": "^2.1",
         "drupal/paragraphs": "^1.13",
         "drupal/pathauto": "^1.8",
