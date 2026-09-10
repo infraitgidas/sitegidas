@@ -35,3 +35,6 @@ gidas/web/sites/*/services.local.yml
 # Backups locales del upgrade D10 (no commitear)
 *.bak
 *.pre-d10
+
+# Backups del fix de URL de archivos
+*.pre-urlfix

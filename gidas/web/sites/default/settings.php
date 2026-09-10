@@ -486,7 +486,7 @@ $settings['reverse_proxy_addresses'] = ['127.0.0.1', '192.168.1.106'];
 # $settings['file_public_base_url'] = 'http://downloads.example.com/files';
 
 // Deshabilitar redirecciones de www
-$settings['file_public_base_url'] = 'http://192.168.1.16:8080/sites/default/files';
+$settings['file_public_base_url'] = 'http://192.168.1.106/sites/default/files';
 
 /**
  * Public file path:
