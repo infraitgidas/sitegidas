@@ -15,3 +15,23 @@ docker-compose.override.yml
 # === SISTEMA ===
 .DS_Store
 Thumbs.db
+
+
+# === DRUPAL / COMPOSER (dentro de gidas/) ===
+gidas/vendor/
+gidas/web/core/
+gidas/web/modules/contrib/
+gidas/web/themes/contrib/
+gidas/web/profiles/contrib/
+gidas/web/libraries/
+gidas/drush/Commands/contrib/
+
+# Archivos generados por Drupal
+gidas/web/sites/*/files/
+gidas/web/sites/*/private/
+gidas/web/sites/*/settings.local.php
+gidas/web/sites/*/services.local.yml
+
+# Backups locales del upgrade D10 (no commitear)
+*.bak
+*.pre-d10
